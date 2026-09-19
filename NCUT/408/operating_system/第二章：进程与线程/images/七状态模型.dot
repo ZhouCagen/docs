@@ -1,0 +1,25 @@
+digraph states {
+ graph [layout=neato, overlap=true, bgcolor="white", pad=0.4, nodesep=0.85, ranksep=1.1, splines=curved, fontname="Noto Sans CJK SC", fontsize=24, labelloc=t, label="进程的七状态模型", dpi=160];
+ node [shape=ellipse, style="filled", fontname="Noto Sans CJK SC", fontsize=19, margin="0.24,0.17", color="#64748b", fillcolor="#eff6ff", penwidth=1.5];
+ edge [fontname="Noto Sans CJK SC", fontsize=12, color="#475569", fontcolor="#334155", arrowsize=0.8, penwidth=1.4];
+ N [label="创建态", pos="0,6!", fillcolor="#df7b40", fontcolor="white"];
+ R [label="就绪态", pos="4,6!", fillcolor="#6099ca", fontcolor="white"];
+ E [label="运行态", pos="10,6!", fillcolor="#6099ca", fontcolor="white"];
+ B [label="阻塞态", pos="8,2!", fillcolor="#6099ca", fontcolor="white"];
+ T [label="终止态", pos="14,6!", fillcolor="#df7b40", fontcolor="white"];
+ RS [label="就绪挂起态", pos="1,2.5!", fillcolor="#77747a", fontcolor="white"];
+ BS [label="阻塞挂起态", pos="3,-1!", fillcolor="#77747a", fontcolor="white"];
+ N -> R [xlabel="接纳"];
+ R -> E [xlabel="进程调度"];
+ E -> R [xlabel="时间片用完／被抢占", constraint=false];
+ E -> T [xlabel="执行结束"];
+ E -> B [xlabel="等待事件"];
+ B -> R [xlabel="事件发生", constraint=false];
+ R -> RS [xlabel="挂起", color="#b7791f"];
+ RS -> R [xlabel="激活", color="#2563eb", fontcolor="#2563eb", constraint=false];
+ B -> BS [xlabel="挂起", color="#b7791f"];
+ BS -> B [xlabel="激活", color="#2563eb", fontcolor="#2563eb", constraint=false];
+ RS -> BS [dir=back, label="事件发生", constraint=true];
+ E -> RS [xlabel="停止运行并挂起", style=dashed, color="#94a3b8", constraint=false];
+ N -> RS [xlabel="接纳但暂不调入内存", style=dashed, color="#94a3b8"];
+}
