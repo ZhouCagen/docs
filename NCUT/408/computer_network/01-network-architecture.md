@@ -1,7 +1,5 @@
 # 第 1 章 计算机网络体系结构
 
-<!-- markdownlint-configure-file {"MD013": false, "MD024": {"siblings_only": true}} -->
-
 ## 1.1 计算机网络概述
 
 ---
