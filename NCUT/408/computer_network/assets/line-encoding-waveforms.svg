@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1320" height="800" viewBox="0 0 1320 800" role="img" aria-labelledby="title desc">
+<title id="title">常用线路编码波形：111100101</title>
+<desc id="desc">依次展示非归零、归零、反向非归零、曼彻斯特与差分曼彻斯特编码。NRZI 初始电平为高，差分曼彻斯特初始电平为低；两者均采用位开始处 0 翻转、1 保持的约定。</desc>
+<rect width="1320" height="800" rx="12" fill="#fff"/>
+<style>text{font-family:"Noto Sans CJK SC","Microsoft YaHei",sans-serif;fill:#243247;font-size:18px}.label{font-size:21px;font-weight:600}.rule{font-size:17px}.muted{fill:#64748b;font-size:15px}.bit{font-family:monospace;font-size:24px;font-weight:bold}</style>
+<text x="660" y="40" class="label" text-anchor="middle">常用线路编码波形对照</text>
+<text x="660" y="70" class="muted" text-anchor="middle">数据：111100101 · 竖虚线为位边界，竖点线为位中间</text>
+<text x="35" y="114" class="label" text-anchor="start">二进制数据</text>
+<text x="308.0" y="114" class="bit" text-anchor="middle">1</text>
+<text x="384.0" y="114" class="bit" text-anchor="middle">1</text>
+<text x="460.0" y="114" class="bit" text-anchor="middle">1</text>
+<text x="536.0" y="114" class="bit" text-anchor="middle">1</text>
+<text x="612.0" y="114" class="bit" text-anchor="middle">0</text>
+<text x="688.0" y="114" class="bit" text-anchor="middle">0</text>
+<text x="764.0" y="114" class="bit" text-anchor="middle">1</text>
+<text x="840.0" y="114" class="bit" text-anchor="middle">0</text>
+<text x="916.0" y="114" class="bit" text-anchor="middle">1</text>
+<line x1="270" y1="170" x2="954" y2="170" stroke="#dbe3eb" stroke-width="1" stroke-dasharray="5 5"/>
+<line x1="270" y1="295" x2="954" y2="295" stroke="#dbe3eb" stroke-width="1" stroke-dasharray="5 5"/>
+<line x1="270" y1="420" x2="954" y2="420" stroke="#dbe3eb" stroke-width="1" stroke-dasharray="5 5"/>
+<line x1="270" y1="545" x2="954" y2="545" stroke="#dbe3eb" stroke-width="1" stroke-dasharray="5 5"/>
+<line x1="270" y1="670" x2="954" y2="670" stroke="#dbe3eb" stroke-width="1" stroke-dasharray="5 5"/>
+<line x1="270" y1="125" x2="270" y2="717" stroke="#a5b2c2" stroke-width="1" stroke-dasharray="6 5"/>
+<line x1="346" y1="125" x2="346" y2="717" stroke="#a5b2c2" stroke-width="1" stroke-dasharray="6 5"/>
+<line x1="422" y1="125" x2="422" y2="717" stroke="#a5b2c2" stroke-width="1" stroke-dasharray="6 5"/>
+<line x1="498" y1="125" x2="498" y2="717" stroke="#a5b2c2" stroke-width="1" stroke-dasharray="6 5"/>
+<line x1="574" y1="125" x2="574" y2="717" stroke="#a5b2c2" stroke-width="1" stroke-dasharray="6 5"/>
+<line x1="650" y1="125" x2="650" y2="717" stroke="#a5b2c2" stroke-width="1" stroke-dasharray="6 5"/>
+<line x1="726" y1="125" x2="726" y2="717" stroke="#a5b2c2" stroke-width="1" stroke-dasharray="6 5"/>
+<line x1="802" y1="125" x2="802" y2="717" stroke="#a5b2c2" stroke-width="1" stroke-dasharray="6 5"/>
+<line x1="878" y1="125" x2="878" y2="717" stroke="#a5b2c2" stroke-width="1" stroke-dasharray="6 5"/>
+<line x1="954" y1="125" x2="954" y2="717" stroke="#a5b2c2" stroke-width="1" stroke-dasharray="6 5"/>
+<line x1="308.0" y1="125" x2="308.0" y2="717" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="2 5"/>
+<line x1="384.0" y1="125" x2="384.0" y2="717" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="2 5"/>
+<line x1="460.0" y1="125" x2="460.0" y2="717" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="2 5"/>
+<line x1="536.0" y1="125" x2="536.0" y2="717" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="2 5"/>
+<line x1="612.0" y1="125" x2="612.0" y2="717" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="2 5"/>
+<line x1="688.0" y1="125" x2="688.0" y2="717" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="2 5"/>
+<line x1="764.0" y1="125" x2="764.0" y2="717" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="2 5"/>
+<line x1="840.0" y1="125" x2="840.0" y2="717" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="2 5"/>
+<line x1="916.0" y1="125" x2="916.0" y2="717" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="2 5"/>
+<text x="25" y="176" class="label" text-anchor="start">非归零编码（NRZ）</text>
+<text x="258" y="149" class="muted" text-anchor="end">H</text>
+<text x="258" y="175" class="muted" text-anchor="end">0</text>
+<text x="258" y="201" class="muted" text-anchor="end">L</text>
+<path d="M 270,144 L 308,144 L 308,144 L 346,144 L 346,144 L 384,144 L 384,144 L 422,144 L 422,144 L 460,144 L 460,144 L 498,144 L 498,144 L 536,144 L 536,144 L 574,144 L 574,196 L 612,196 L 612,196 L 650,196 L 650,196 L 688,196 L 688,196 L 726,196 L 726,144 L 764,144 L 764,144 L 802,144 L 802,196 L 840,196 L 840,196 L 878,196 L 878,144 L 916,144 L 916,144 L 954,144" fill="none" stroke="#2563eb" stroke-width="3" stroke-linejoin="round"/>
+<text x="985" y="166" class="rule" text-anchor="start">1 为高电平，0 为低电平</text>
+<text x="985" y="195" class="rule" text-anchor="start">位期间电平保持不变</text>
+<text x="25" y="301" class="label" text-anchor="start">归零编码（RZ）</text>
+<text x="258" y="274" class="muted" text-anchor="end">H</text>
+<text x="258" y="300" class="muted" text-anchor="end">0</text>
+<text x="258" y="326" class="muted" text-anchor="end">L</text>
+<path d="M 270,269 L 308,269 L 308,295 L 346,295 L 346,269 L 384,269 L 384,295 L 422,295 L 422,269 L 460,269 L 460,295 L 498,295 L 498,269 L 536,269 L 536,295 L 574,295 L 574,321 L 612,321 L 612,295 L 650,295 L 650,321 L 688,321 L 688,295 L 726,295 L 726,269 L 764,269 L 764,295 L 802,295 L 802,321 L 840,321 L 840,295 L 878,295 L 878,269 L 916,269 L 916,295 L 954,295" fill="none" stroke="#0891b2" stroke-width="3" stroke-linejoin="round"/>
+<text x="985" y="291" class="rule" text-anchor="start">1 为正脉冲，0 为负脉冲</text>
+<text x="985" y="320" class="rule" text-anchor="start">每位后半段回到零电平</text>
+<text x="25" y="426" class="label" text-anchor="start">反向非归零（NRZI）</text>
+<text x="258" y="399" class="muted" text-anchor="end">H</text>
+<text x="258" y="425" class="muted" text-anchor="end">0</text>
+<text x="258" y="451" class="muted" text-anchor="end">L</text>
+<path d="M 245,394 L 270,394 L 270,394 L 308,394 L 308,394 L 346,394 L 346,394 L 384,394 L 384,394 L 422,394 L 422,394 L 460,394 L 460,394 L 498,394 L 498,394 L 536,394 L 536,394 L 574,394 L 574,446 L 612,446 L 612,446 L 650,446 L 650,394 L 688,394 L 688,394 L 726,394 L 726,394 L 764,394 L 764,394 L 802,394 L 802,446 L 840,446 L 840,446 L 878,446 L 878,446 L 916,446 L 916,446 L 954,446" fill="none" stroke="#7c3aed" stroke-width="3" stroke-linejoin="round"/>
+<text x="985" y="416" class="rule" text-anchor="start">位开始：0 翻转，1 保持</text>
+<text x="985" y="445" class="rule" text-anchor="start">位中间不跳变；初始为 H</text>
+<text x="25" y="551" class="label" text-anchor="start">曼彻斯特编码</text>
+<text x="258" y="524" class="muted" text-anchor="end">H</text>
+<text x="258" y="550" class="muted" text-anchor="end">0</text>
+<text x="258" y="576" class="muted" text-anchor="end">L</text>
+<path d="M 270,519 L 308,519 L 308,571 L 346,571 L 346,519 L 384,519 L 384,571 L 422,571 L 422,519 L 460,519 L 460,571 L 498,571 L 498,519 L 536,519 L 536,571 L 574,571 L 574,571 L 612,571 L 612,519 L 650,519 L 650,571 L 688,571 L 688,519 L 726,519 L 726,519 L 764,519 L 764,571 L 802,571 L 802,571 L 840,571 L 840,519 L 878,519 L 878,519 L 916,519 L 916,571 L 954,571" fill="none" stroke="#d97706" stroke-width="3" stroke-linejoin="round"/>
+<text x="985" y="541" class="rule" text-anchor="start">位中间：1 下降，0 上升</text>
+<text x="985" y="570" class="rule" text-anchor="start">每位中间必跳变</text>
+<text x="25" y="676" class="label" text-anchor="start">差分曼彻斯特编码</text>
+<text x="258" y="649" class="muted" text-anchor="end">H</text>
+<text x="258" y="675" class="muted" text-anchor="end">0</text>
+<text x="258" y="701" class="muted" text-anchor="end">L</text>
+<path d="M 245,696 L 270,696 L 270,696 L 308,696 L 308,644 L 346,644 L 346,644 L 384,644 L 384,696 L 422,696 L 422,696 L 460,696 L 460,644 L 498,644 L 498,644 L 536,644 L 536,696 L 574,696 L 574,644 L 612,644 L 612,696 L 650,696 L 650,644 L 688,644 L 688,696 L 726,696 L 726,696 L 764,696 L 764,644 L 802,644 L 802,696 L 840,696 L 840,644 L 878,644 L 878,644 L 916,644 L 916,696 L 954,696" fill="none" stroke="#059669" stroke-width="3" stroke-linejoin="round"/>
+<text x="985" y="666" class="rule" text-anchor="start">位开始：0 翻转，1 保持</text>
+<text x="985" y="695" class="rule" text-anchor="start">每位中间必跳变；初始为 L</text>
+<text x="270" y="753" class="muted" text-anchor="start">读图：NRZ 看电平；NRZI 看位开始；曼彻斯特看位中间方向；差分曼彻斯特看位开始。</text>
+<text x="270" y="779" class="muted" text-anchor="start">本图沿用截图约定；具体题目若采用不同映射，以题目为准。H / L 表示高 / 低电平，0 表示零电平。</text>
+</svg>
