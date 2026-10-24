@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="610" viewBox="0 0 1120 610" role="img" aria-labelledby="title desc">
+  <title id="title">用“三次握手”建立 TCP 连接</title>
+  <desc id="desc">时间自上向下。客户端 A 主动打开，从 CLOSED 进入 SYN-SENT，向处于 LISTEN 的服务器 B 发送 SYN=1、seq=x。B 收到后进入 SYN-RCVD，返回 SYN=1、ACK=1、seq=y、ack=x+1。A 收到后进入 ESTABLISHED，发送 ACK=1、seq=x+1、ack=y+1。B 收到最终确认后进入 ESTABLISHED。三条报文线的接收端均低于发送端，表示传输时延。</desc>
+  <defs>
+    <marker id="arrow" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0 0 L9 3.5 L0 7 Z" fill="#252525"/>
+    </marker>
+    <g id="computer" fill="#fff" stroke="#252525" stroke-width="1.5" stroke-linejoin="round">
+      <rect x="-23" y="0" width="46" height="30" rx="1"/>
+      <path d="M-18 5 H18 V25 H-18 Z" fill="#f4f4f4"/>
+      <path d="M-23 30 L-30 39 H30 L23 30 Z M-30 39 V42 H30 V39 M-18 34 H18"/>
+    </g>
+  </defs>
+  <style>
+    text { font-family: "Noto Sans CJK SC", "Microsoft YaHei", sans-serif; fill: #202020; text-anchor: middle; }
+    .host { font-size: 23px; }
+    .state { fill: #fafafa; stroke: #303030; stroke-width: 1.6; }
+    .state-label { font-family: Arial, "Noto Sans CJK SC", sans-serif; font-size: 20px; }
+    .packet { fill: none; stroke: #252525; stroke-width: 1.8; marker-end: url(#arrow); }
+    .packet-label { font-family: Arial, "Noto Sans CJK SC", sans-serif; font-size: 20px; }
+    .annotation { font-size: 18px; }
+    .guide { fill: none; stroke: #555; stroke-width: 1.4; }
+    .caption { font-family: "Noto Serif CJK SC", "SimSun", serif; font-size: 23px; }
+  </style>
+  <rect width="1120" height="610" fill="#fff"/>
+
+  <text x="282" y="29" class="host">客户</text>
+  <text x="918" y="29" class="host">服务器</text>
+  <use href="#computer" x="282" y="44"/>
+  <use href="#computer" x="918" y="44"/>
+  <text x="325" y="70" class="annotation">A</text>
+  <text x="875" y="70" class="annotation">B</text>
+  <path d="M55 150 V540" class="guide" marker-end="url(#arrow)"/>
+  <text x="55" y="126" class="annotation">时间</text>
+
+  <!-- Each box spans the interval in which that endpoint holds the state. -->
+  <rect x="210" y="105" width="144" height="45" class="state"/>
+  <rect x="210" y="150" width="144" height="170" class="state"/>
+  <rect x="210" y="320" width="144" height="220" class="state"/>
+  <text x="282" y="135" class="state-label">CLOSED</text>
+  <text x="282" y="242" class="state-label">SYN-SENT</text>
+  <text x="282" y="425" class="state-label"><tspan x="282">ESTAB-</tspan><tspan x="282" dy="27">LISHED</tspan></text>
+
+  <rect x="846" y="105" width="144" height="45" class="state"/>
+  <rect x="846" y="150" width="144" height="80" class="state"/>
+  <rect x="846" y="230" width="144" height="170" class="state"/>
+  <rect x="846" y="400" width="144" height="140" class="state"/>
+  <text x="918" y="135" class="state-label">CLOSED</text>
+  <text x="918" y="197" class="state-label">LISTEN</text>
+  <text x="918" y="322" class="state-label">SYN-RCVD</text>
+  <text x="918" y="465" class="state-label"><tspan x="918">ESTAB-</tspan><tspan x="918" dy="27">LISHED</tspan></text>
+
+  <path d="M210 150 H130 V79 H252" class="guide"/>
+  <text x="170" y="137" class="annotation">主动打开</text>
+  <path d="M990 150 H1065 V79 H948" class="guide"/>
+  <text x="1028" y="137" class="annotation">被动打开</text>
+
+  <!-- A packet always arrives later (lower on the time axis) than it leaves. -->
+  <line x1="354" y1="150" x2="846" y2="230" class="packet"/>
+  <text transform="translate(600 190) rotate(9.236)" y="-12" class="packet-label">SYN=1, seq=x</text>
+  <line x1="846" y1="230" x2="354" y2="320" class="packet"/>
+  <text transform="translate(600 275) rotate(-10.367)" y="-12" class="packet-label">SYN=1, ACK=1, seq=y, ack=x+1</text>
+  <line x1="354" y1="320" x2="846" y2="400" class="packet"/>
+  <text transform="translate(600 360) rotate(9.236)" y="-12" class="packet-label">ACK=1, seq=x+1, ack=y+1</text>
+
+  <g fill="#fff" stroke="#303030" stroke-width="1.5" stroke-linejoin="round">
+    <path d="M451 482 L475 467 V476 H725 V467 L749 482 L725 497 V488 H475 V497 Z"/>
+    <rect x="544" y="465" width="112" height="34"/>
+  </g>
+  <text x="600" y="489" class="annotation">数据传送</text>
+  <text x="600" y="585" class="caption">用“三次握手”建立 TCP 连接</text>
+</svg>

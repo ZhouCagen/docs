@@ -1,0 +1,121 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1560" height="925" viewBox="0 0 1560 925" role="img" aria-labelledby="title desc">
+  <title id="title">SMTP 与 POP3 的工作过程</title>
+  <desc id="desc">时间自上向下。发件人用户代理通过 SMTP 提交邮件，发送方邮件服务器作为 SMTP 客户端，连接接收方邮件服务器的 TCP 25 端口，依次发送 HELO、MAIL FROM、RCPT TO、DATA、邮件内容和 QUIT。收件人用户代理作为 POP3 客户端，连接接收方邮件服务器的 TCP 110 端口，认证并请求邮件列表，再请求下载邮件，由服务器返回邮件内容。图中省略服务器对各 SMTP 命令的响应。</desc>
+  <defs>
+    <marker id="arrow" markerWidth="9" markerHeight="8" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0 0 L9 4 L0 8 Z" fill="#343b45"/>
+    </marker>
+    <marker id="mail-arrow" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0 0 L10 4 L0 8 Z" fill="#b13752"/>
+    </marker>
+  </defs>
+  <style>
+    text { font-family: "Noto Sans CJK SC", "Microsoft YaHei", sans-serif; fill: #26313e; }
+    .heading { font-size: 32px; font-weight: 700; fill: #3979ae; text-anchor: middle; }
+    .host { fill: #fff; stroke: #7c8793; stroke-width: 1.5; }
+    .host-label { font-size: 22px; text-anchor: middle; }
+    .lifeline { stroke: #9ca5ae; stroke-width: 1.5; }
+    .smtp { fill: #ff9b59; stroke: #a35c2e; stroke-width: 1.5; }
+    .pop { fill: #84e58a; stroke: #47834b; stroke-width: 1.5; }
+    .role { font-family: Arial, "Noto Sans CJK SC", sans-serif; font-size: 18px; text-anchor: middle; }
+    .packet { fill: none; stroke: #343b45; stroke-width: 1.8; marker-end: url(#arrow); }
+    .mail { fill: none; stroke: #b13752; stroke-width: 2.2; marker-end: url(#mail-arrow); }
+    .label { font-size: 20px; text-anchor: middle; }
+    .small { font-size: 17px; fill: #586372; text-anchor: middle; }
+    .mail-label { fill: #a42e49; }
+    .note { font-size: 20px; }
+    .note-title { font-size: 22px; font-weight: 700; }
+  </style>
+  <rect width="1560" height="925" fill="#fff"/>
+  <text x="780" y="49" class="heading">SMTP 与 POP3</text>
+  <path d="M620 72 H770" stroke="#ff9b59" stroke-width="5"/>
+  <path d="M790 72 H940" stroke="#84e58a" stroke-width="5"/>
+
+  <!-- Four communication participants, repeated at the bottom. -->
+  <g class="host">
+    <rect x="65" y="102" width="180" height="66" rx="4"/>
+    <rect x="355" y="102" width="180" height="66" rx="4"/>
+    <rect x="645" y="102" width="180" height="66" rx="4"/>
+    <rect x="935" y="102" width="180" height="66" rx="4"/>
+    <rect x="65" y="830" width="180" height="66" rx="4"/>
+    <rect x="355" y="830" width="180" height="66" rx="4"/>
+    <rect x="645" y="830" width="180" height="66" rx="4"/>
+    <rect x="935" y="830" width="180" height="66" rx="4"/>
+  </g>
+  <g class="host-label">
+    <text x="155" y="130"><tspan x="155">发件人</tspan><tspan x="155" dy="27">用户代理</tspan></text>
+    <text x="445" y="130"><tspan x="445">发送方</tspan><tspan x="445" dy="27">邮件服务器</tspan></text>
+    <text x="735" y="130"><tspan x="735">接收方</tspan><tspan x="735" dy="27">邮件服务器</tspan></text>
+    <text x="1025" y="130"><tspan x="1025">收件人</tspan><tspan x="1025" dy="27">用户代理</tspan></text>
+    <text x="155" y="858"><tspan x="155">发件人</tspan><tspan x="155" dy="27">用户代理</tspan></text>
+    <text x="445" y="858"><tspan x="445">发送方</tspan><tspan x="445" dy="27">邮件服务器</tspan></text>
+    <text x="735" y="858"><tspan x="735">接收方</tspan><tspan x="735" dy="27">邮件服务器</tspan></text>
+    <text x="1025" y="858"><tspan x="1025">收件人</tspan><tspan x="1025" dy="27">用户代理</tspan></text>
+  </g>
+  <g class="lifeline">
+    <path d="M155 168 V830"/>
+    <path d="M445 168 V830"/>
+    <path d="M735 168 V830"/>
+    <path d="M1025 168 V830"/>
+  </g>
+  <text x="34" y="215" class="small">时间</text>
+  <path d="M34 231 V793" class="packet" stroke-dasharray="5 5"/>
+
+  <!-- The initial submission uses SMTP as well. -->
+  <rect x="140" y="211" width="30" height="20" class="smtp"/>
+  <rect x="430" y="211" width="30" height="20" class="smtp"/>
+  <path d="M170 221 H430" class="packet"/>
+  <text x="300" y="204" class="label">通过 SMTP 提交邮件</text>
+  <text x="300" y="248" class="small">（流程与服务器间类似）</text>
+
+  <!-- SMTP: commands and content go from the sending server to the receiver. -->
+  <rect x="430" y="270" width="30" height="310" class="smtp"/>
+  <rect x="720" y="270" width="30" height="310" class="smtp"/>
+  <text x="445" y="350" class="role"><tspan x="445">S</tspan><tspan x="445" dy="22">M</tspan><tspan x="445" dy="22">T</tspan><tspan x="445" dy="22">P</tspan><tspan x="445" dy="27">客</tspan><tspan x="445" dy="22">户</tspan><tspan x="445" dy="22">端</tspan></text>
+  <text x="735" y="350" class="role"><tspan x="735">S</tspan><tspan x="735" dy="22">M</tspan><tspan x="735" dy="22">T</tspan><tspan x="735" dy="22">P</tspan><tspan x="735" dy="27">服</tspan><tspan x="735" dy="22">务</tspan><tspan x="735" dy="22">器</tspan></text>
+  <path d="M460 297 H720" class="packet"/>
+  <text x="590" y="285" class="label">建立 TCP 连接（<tspan fill="#b05e23">25 端口</tspan>）</text>
+  <path d="M460 341 H720" class="packet"/>
+  <text x="590" y="329" class="label">HELO 命令</text>
+  <path d="M460 385 H720" class="mail"/>
+  <text x="590" y="373" class="label mail-label">MAIL FROM 命令</text>
+  <path d="M460 429 H720" class="mail"/>
+  <text x="590" y="417" class="label mail-label">RCPT TO 命令</text>
+  <path d="M460 473 H720" class="packet"/>
+  <text x="590" y="461" class="label">DATA 命令</text>
+  <path d="M460 517 H720" class="mail"/>
+  <text x="590" y="505" class="label mail-label">邮件内容（首部＋主体）</text>
+  <path d="M460 561 H720" class="packet"/>
+  <text x="590" y="549" class="label">QUIT 命令</text>
+
+  <!-- POP3: the recipient starts the connection and pulls the messages. -->
+  <rect x="720" y="610" width="30" height="185" class="pop"/>
+  <rect x="1010" y="610" width="30" height="185" class="pop"/>
+  <text x="735" y="635" class="role"><tspan x="735">P</tspan><tspan x="735" dy="22">O</tspan><tspan x="735" dy="22">P</tspan><tspan x="735" dy="22">3</tspan><tspan x="735" dy="27">服</tspan><tspan x="735" dy="22">务</tspan><tspan x="735" dy="22">器</tspan></text>
+  <text x="1025" y="635" class="role"><tspan x="1025">P</tspan><tspan x="1025" dy="22">O</tspan><tspan x="1025" dy="22">P</tspan><tspan x="1025" dy="22">3</tspan><tspan x="1025" dy="27">客</tspan><tspan x="1025" dy="22">户</tspan><tspan x="1025" dy="22">端</tspan></text>
+  <path d="M1010 638 H750" class="packet"/>
+  <text x="880" y="626" class="label">建立 TCP 连接（<tspan fill="#327a42">110 端口</tspan>）</text>
+  <path d="M1010 682 H750" class="packet"/>
+  <text x="880" y="670" class="label">身份验证、请求邮件列表</text>
+  <path d="M1010 726 H750" class="mail"/>
+  <text x="880" y="714" class="label mail-label">请求下载邮件</text>
+  <path d="M750 770 H1010" class="mail"/>
+  <text x="880" y="758" class="label mail-label">传输邮件内容</text>
+
+  <!-- Explanations, separate from the sequence lifelines. -->
+  <rect x="1100" y="270" width="425" height="310" rx="6" fill="#fffaf5" stroke="#cf9b69" stroke-width="1.5" stroke-dasharray="6 4"/>
+  <text x="1120" y="302" class="note-title">SMTP 命令与响应</text>
+  <text x="1120" y="335" class="note">
+    <tspan x="1120">客户端发出的每条命令，服务器</tspan>
+    <tspan x="1120" dy="28">都会响应；图中省略这些响应。</tspan>
+    <tspan x="1120" dy="39">• HELO：打招呼，介绍自身。</tspan>
+    <tspan x="1120" dy="34">• MAIL FROM：指明“谁发的”。</tspan>
+    <tspan x="1120" dy="34">• RCPT TO：指明“发给谁”，</tspan>
+    <tspan x="1140" dy="28">服务器检查收件人并响应。</tspan>
+    <tspan x="1120" dy="34">• DATA：接下来开始传送内容。</tspan>
+    <tspan x="1120" dy="34">• QUIT：结束邮件传输会话。</tspan>
+  </text>
+  <rect x="1100" y="650" width="425" height="123" rx="6" fill="#f5fcf5" stroke="#80ab7e" stroke-width="1.5" stroke-dasharray="6 4"/>
+  <text x="1120" y="683" class="note-title">POP3 下载邮件</text>
+  <text x="1120" y="718" class="note"><tspan x="1120">可选择“下载并删除”，</tspan><tspan x="1120" dy="30">或“下载并保留”。</tspan></text>
+</svg>

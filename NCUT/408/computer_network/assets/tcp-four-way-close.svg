@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="945" viewBox="0 0 1120 945" role="img" aria-labelledby="title desc">
+  <title id="title">用“四次挥手”释放 TCP 连接</title>
+  <desc id="desc">时间自上向下。A 主动关闭，发送 FIN=1、ACK=1、seq=u，进入 FIN-WAIT-1。B 收到后进入 CLOSE-WAIT，回复 ACK=1、seq=v、ack=u+1；A 收到后进入 FIN-WAIT-2。半关闭期间 B 仍可向 A 传送剩余数据。B 的应用关闭后，发送 FIN=1、ACK=1、seq=w、ack=u+1，进入 LAST-ACK。A 收到后发送 ACK=1、seq=u+1、ack=w+1，进入 TIME-WAIT，等待 2MSL 后进入 CLOSED。B 收到最终 ACK 后进入 CLOSED。所有报文线的接收端均低于发送端。</desc>
+  <defs>
+    <marker id="arrow" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0 0 L9 3.5 L0 7 Z" fill="#252525"/>
+    </marker>
+    <g id="computer" fill="#fff" stroke="#252525" stroke-width="1.5" stroke-linejoin="round">
+      <rect x="-23" y="0" width="46" height="30" rx="1"/>
+      <path d="M-18 5 H18 V25 H-18 Z" fill="#f4f4f4"/>
+      <path d="M-23 30 L-30 39 H30 L23 30 Z M-30 39 V42 H30 V39 M-18 34 H18"/>
+    </g>
+  </defs>
+  <style>
+    text { font-family: "Noto Sans CJK SC", "Microsoft YaHei", sans-serif; fill: #202020; text-anchor: middle; }
+    .host { font-size: 23px; }
+    .state { fill: #fafafa; stroke: #303030; stroke-width: 1.6; }
+    .state-label { font-family: Arial, "Noto Sans CJK SC", sans-serif; font-size: 20px; }
+    .packet { fill: none; stroke: #252525; stroke-width: 1.8; marker-end: url(#arrow); }
+    .packet-label { font-family: Arial, "Noto Sans CJK SC", sans-serif; font-size: 20px; }
+    .annotation { font-size: 18px; }
+    .guide { fill: none; stroke: #555; stroke-width: 1.4; }
+    .caption { font-family: "Noto Serif CJK SC", "SimSun", serif; font-size: 23px; }
+  </style>
+  <rect width="1120" height="945" fill="#fff"/>
+
+  <text x="282" y="29" class="host">客户</text>
+  <text x="918" y="29" class="host">服务器</text>
+  <use href="#computer" x="282" y="44"/>
+  <use href="#computer" x="918" y="44"/>
+  <text x="325" y="70" class="annotation">A</text>
+  <text x="875" y="70" class="annotation">B</text>
+  <path d="M40 150 V870" class="guide" marker-end="url(#arrow)"/>
+  <text x="40" y="126" class="annotation">时间</text>
+
+  <!-- Transitions align exactly with local FIN/ACK send and receive events. -->
+  <rect x="210" y="105" width="144" height="85" class="state"/>
+  <rect x="210" y="190" width="144" height="180" class="state"/>
+  <rect x="210" y="370" width="144" height="235" class="state"/>
+  <rect x="210" y="605" width="144" height="210" class="state"/>
+  <rect x="210" y="815" width="144" height="55" class="state"/>
+  <text x="282" y="143" class="state-label"><tspan x="282">ESTAB-</tspan><tspan x="282" dy="27">LISHED</tspan></text>
+  <text x="282" y="274" class="state-label"><tspan x="282">FIN-</tspan><tspan x="282" dy="27">WAIT-1</tspan></text>
+  <text x="282" y="481" class="state-label"><tspan x="282">FIN-</tspan><tspan x="282" dy="27">WAIT-2</tspan></text>
+  <text x="282" y="704" class="state-label"><tspan x="282">TIME-</tspan><tspan x="282" dy="27">WAIT</tspan></text>
+  <text x="282" y="850" class="state-label">CLOSED</text>
+
+  <rect x="846" y="105" width="144" height="175" class="state"/>
+  <rect x="846" y="280" width="144" height="235" class="state"/>
+  <rect x="846" y="515" width="144" height="180" class="state"/>
+  <rect x="846" y="695" width="144" height="55" class="state"/>
+  <text x="918" y="186" class="state-label"><tspan x="918">ESTAB-</tspan><tspan x="918" dy="27">LISHED</tspan></text>
+  <text x="918" y="391" class="state-label"><tspan x="918">CLOSE-</tspan><tspan x="918" dy="27">WAIT</tspan></text>
+  <text x="918" y="599" class="state-label"><tspan x="918">LAST-</tspan><tspan x="918" dy="27">ACK</tspan></text>
+  <text x="918" y="730" class="state-label">CLOSED</text>
+
+  <path d="M210 190 H119 V79 H252" class="guide"/>
+  <text x="164" y="178" class="annotation">主动关闭</text>
+  <path d="M948 79 H1090 V515 H990" class="guide"/>
+  <text x="1040" y="501" class="annotation">被动关闭</text>
+  <path d="M1000 105 C1027 105 1027 130 1027 163 V222 C1027 255 1027 280 1000 280" class="guide"/>
+  <text x="1053" y="167" class="annotation"><tspan x="1053">通知</tspan><tspan x="1053" dy="26">应用</tspan><tspan x="1053" dy="26">进程</tspan></text>
+
+  <line x1="354" y1="190" x2="846" y2="280" class="packet"/>
+  <text transform="translate(600 235) rotate(10.367)" y="-12" class="packet-label">FIN=1, ACK=1, seq=u</text>
+  <line x1="846" y1="280" x2="354" y2="370" class="packet"/>
+  <text transform="translate(600 325) rotate(-10.367)" y="-12" class="packet-label">ACK=1, seq=v, ack=u+1</text>
+
+  <!-- The remaining data travels only from B to A during the half-close. -->
+  <line x1="846" y1="405" x2="354" y2="495" class="packet" stroke-dasharray="7 5"/>
+  <text transform="translate(600 450) rotate(-10.367)" y="-13" class="annotation">剩余数据（B → A）</text>
+  <text x="600" y="505" class="annotation">半关闭：A 仍可接收数据</text>
+
+  <line x1="846" y1="515" x2="354" y2="605" class="packet"/>
+  <text transform="translate(600 560) rotate(-10.367)" y="-12" class="packet-label">FIN=1, ACK=1, seq=w, ack=u+1</text>
+  <line x1="354" y1="605" x2="846" y2="695" class="packet"/>
+  <text transform="translate(600 650) rotate(10.367)" y="-12" class="packet-label">ACK=1, seq=u+1, ack=w+1</text>
+
+  <path d="M210 605 H83 V815 H210" class="guide"/>
+  <text x="147" y="682" class="annotation"><tspan x="147">等待</tspan><tspan x="147" dy="28">2MSL</tspan></text>
+  <g fill="none" stroke="#555" stroke-width="1.4">
+    <circle cx="147" cy="750" r="17"/>
+    <path d="M147 737 V750 L157 756 M147 733 V736 M147 764 V767 M130 750 H133 M161 750 H164"/>
+  </g>
+  <text x="600" y="916" class="caption">用“四次挥手”释放 TCP 连接</text>
+</svg>

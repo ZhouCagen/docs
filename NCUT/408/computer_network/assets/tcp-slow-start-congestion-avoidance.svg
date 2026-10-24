@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1320" height="790" viewBox="0 0 1320 790" role="img" aria-labelledby="title desc">
+  <title id="title">慢开始和拥塞避免算法的实现过程</title>
+  <desc id="desc">横轴从第0轮开始，纵轴为拥塞窗口，以MSS为单位。第0至4轮窗口为1、2、4、8、16，之后线性增至第12轮的24。发生超时后，门限从16减为12，第13轮窗口回到1；第13至17轮为1、2、4、8、12，之后继续线性增长。灰色区域标出慢开始和拥塞避免，双向箭头表示门限减半。</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M0 0 L10 4 L0 8 Z" fill="#292929"/></marker>
+  </defs>
+  <style>
+    text { font-family: "Noto Sans CJK SC", "Microsoft YaHei", sans-serif; fill: #222; text-anchor: middle; font-size: 20px; }
+    .axis { fill: none; stroke: #292929; stroke-width: 1.8; marker-end: url(#arrow); }
+    .tick { stroke: #444; stroke-width: 1.2; }
+    .guide { fill: none; stroke: #777; stroke-width: 1.3; stroke-dasharray: 8 6; }
+    .curve { fill: none; stroke: #222; stroke-width: 2.5; stroke-linejoin: round; stroke-linecap: round; }
+    .point { fill: #222; }
+    .leader { fill: none; stroke: #444; stroke-width: 1.5; marker-end: url(#arrow); }
+    .band { fill: #efefef; }
+    .caption { font-family: "Noto Serif CJK SC", "SimSun", serif; font-size: 24px; }
+    .note { font-size: 17px; fill: #555; }
+  </style>
+  <rect width="1320" height="790" fill="#fff"/>
+  <rect x="443.64" y="196" width="327.27" height="171" class="band"/>
+  <rect x="975.45" y="339" width="204.55" height="154" class="band"/>
+  <rect x="280.00" y="654" width="163.64" height="43" class="band"/>
+  <rect x="811.82" y="654" width="163.64" height="43" class="band"/>
+  <line x1="280.00" y1="610.00" x2="1215.00" y2="610.00" class="axis" />
+  <line x1="280.00" y1="610.00" x2="280.00" y2="174.00" class="axis" />
+  <text x="280.00" y="154.00" style="text-anchor:start">拥塞窗口 cwnd（单位：MSS）</text>
+  <text x="1215.00" y="679.00" style="text-anchor:end">传输轮次</text>
+  <line x1="280.00" y1="610.00" x2="280.00" y2="603.00" class="tick" />
+  <text x="280.00" y="640.00">0</text>
+  <line x1="320.91" y1="610.00" x2="320.91" y2="603.00" class="tick" />
+  <line x1="361.82" y1="610.00" x2="361.82" y2="603.00" class="tick" />
+  <text x="361.82" y="640.00">2</text>
+  <line x1="402.73" y1="610.00" x2="402.73" y2="603.00" class="tick" />
+  <line x1="443.64" y1="610.00" x2="443.64" y2="603.00" class="tick" />
+  <text x="443.64" y="640.00">4</text>
+  <line x1="484.55" y1="610.00" x2="484.55" y2="603.00" class="tick" />
+  <line x1="525.45" y1="610.00" x2="525.45" y2="603.00" class="tick" />
+  <text x="525.45" y="640.00">6</text>
+  <line x1="566.36" y1="610.00" x2="566.36" y2="603.00" class="tick" />
+  <line x1="607.27" y1="610.00" x2="607.27" y2="603.00" class="tick" />
+  <text x="607.27" y="640.00">8</text>
+  <line x1="648.18" y1="610.00" x2="648.18" y2="603.00" class="tick" />
+  <line x1="689.09" y1="610.00" x2="689.09" y2="603.00" class="tick" />
+  <text x="689.09" y="640.00">10</text>
+  <line x1="730.00" y1="610.00" x2="730.00" y2="603.00" class="tick" />
+  <line x1="770.91" y1="610.00" x2="770.91" y2="603.00" class="tick" />
+  <text x="770.91" y="640.00">12</text>
+  <line x1="811.82" y1="610.00" x2="811.82" y2="603.00" class="tick" />
+  <line x1="852.73" y1="610.00" x2="852.73" y2="603.00" class="tick" />
+  <text x="852.73" y="640.00">14</text>
+  <line x1="893.64" y1="610.00" x2="893.64" y2="603.00" class="tick" />
+  <line x1="934.55" y1="610.00" x2="934.55" y2="603.00" class="tick" />
+  <text x="934.55" y="640.00">16</text>
+  <line x1="975.45" y1="610.00" x2="975.45" y2="603.00" class="tick" />
+  <line x1="1016.36" y1="610.00" x2="1016.36" y2="603.00" class="tick" />
+  <text x="1016.36" y="640.00">18</text>
+  <line x1="1057.27" y1="610.00" x2="1057.27" y2="603.00" class="tick" />
+  <line x1="1098.18" y1="610.00" x2="1098.18" y2="603.00" class="tick" />
+  <text x="1098.18" y="640.00">20</text>
+  <line x1="1139.09" y1="610.00" x2="1139.09" y2="603.00" class="tick" />
+  <line x1="1180.00" y1="610.00" x2="1180.00" y2="603.00" class="tick" />
+  <text x="1180.00" y="640.00">22</text>
+  <line x1="280.00" y1="610.00" x2="287.00" y2="610.00" class="tick" />
+  <text x="263.00" y="617.00" style="text-anchor:end">0</text>
+  <line x1="280.00" y1="546.00" x2="287.00" y2="546.00" class="tick" />
+  <text x="263.00" y="553.00" style="text-anchor:end">4</text>
+  <line x1="280.00" y1="482.00" x2="287.00" y2="482.00" class="tick" />
+  <text x="263.00" y="489.00" style="text-anchor:end">8</text>
+  <line x1="280.00" y1="418.00" x2="287.00" y2="418.00" class="tick" />
+  <text x="263.00" y="425.00" style="text-anchor:end">12</text>
+  <line x1="280.00" y1="354.00" x2="287.00" y2="354.00" class="tick" />
+  <text x="263.00" y="361.00" style="text-anchor:end">16</text>
+  <line x1="280.00" y1="290.00" x2="287.00" y2="290.00" class="tick" />
+  <text x="263.00" y="297.00" style="text-anchor:end">20</text>
+  <line x1="280.00" y1="226.00" x2="287.00" y2="226.00" class="tick" />
+  <text x="263.00" y="233.00" style="text-anchor:end">24</text>
+  <line x1="280.00" y1="354.00" x2="1180.00" y2="354.00" class="guide" />
+  <text x="223.00" y="361.00" style="text-anchor:end">初始 ssthresh=16</text>
+  <line x1="280.00" y1="418.00" x2="1180.00" y2="418.00" class="guide" />
+  <text x="223.00" y="425.00" style="text-anchor:end">新的 ssthresh=12</text>
+  <line x1="770.91" y1="226.00" x2="847.91" y2="226.00" class="guide" />
+  <text x="607.27" y="242.00">拥塞避免</text>
+  <text x="607.27" y="273.00">“加法增大”</text>
+  <text x="1077.73" y="450.00">拥塞避免</text>
+  <text x="1077.73" y="481.00">“加法增大”</text>
+  <text x="361.82" y="683.00">慢开始</text>
+  <text x="893.64" y="683.00">慢开始</text>
+  <polyline points="280.00,594.00 320.91,578.00 361.82,546.00 402.73,482.00 443.64,354.00 484.55,338.00 525.45,322.00 566.36,306.00 607.27,290.00 648.18,274.00 689.09,258.00 730.00,242.00 770.91,226.00 811.82,594.00 852.73,578.00 893.64,546.00 934.55,482.00 975.45,418.00 1016.36,402.00 1057.27,386.00 1098.18,370.00 1139.09,354.00" class="curve"/>
+  <circle cx="280.00" cy="594.00" r="4.6" class="point" data-round="0" data-cwnd="1"/>
+  <circle cx="320.91" cy="578.00" r="4.6" class="point" data-round="1" data-cwnd="2"/>
+  <circle cx="361.82" cy="546.00" r="4.6" class="point" data-round="2" data-cwnd="4"/>
+  <circle cx="402.73" cy="482.00" r="4.6" class="point" data-round="3" data-cwnd="8"/>
+  <circle cx="443.64" cy="354.00" r="4.6" class="point" data-round="4" data-cwnd="16"/>
+  <circle cx="484.55" cy="338.00" r="4.6" class="point" data-round="5" data-cwnd="17"/>
+  <circle cx="525.45" cy="322.00" r="4.6" class="point" data-round="6" data-cwnd="18"/>
+  <circle cx="566.36" cy="306.00" r="4.6" class="point" data-round="7" data-cwnd="19"/>
+  <circle cx="607.27" cy="290.00" r="4.6" class="point" data-round="8" data-cwnd="20"/>
+  <circle cx="648.18" cy="274.00" r="4.6" class="point" data-round="9" data-cwnd="21"/>
+  <circle cx="689.09" cy="258.00" r="4.6" class="point" data-round="10" data-cwnd="22"/>
+  <circle cx="730.00" cy="242.00" r="4.6" class="point" data-round="11" data-cwnd="23"/>
+  <circle cx="770.91" cy="226.00" r="4.6" class="point" data-round="12" data-cwnd="24"/>
+  <circle cx="811.82" cy="594.00" r="4.6" class="point" data-round="13" data-cwnd="1"/>
+  <circle cx="852.73" cy="578.00" r="4.6" class="point" data-round="14" data-cwnd="2"/>
+  <circle cx="893.64" cy="546.00" r="4.6" class="point" data-round="15" data-cwnd="4"/>
+  <circle cx="934.55" cy="482.00" r="4.6" class="point" data-round="16" data-cwnd="8"/>
+  <circle cx="975.45" cy="418.00" r="4.6" class="point" data-round="17" data-cwnd="12"/>
+  <circle cx="1016.36" cy="402.00" r="4.6" class="point" data-round="18" data-cwnd="13"/>
+  <circle cx="1057.27" cy="386.00" r="4.6" class="point" data-round="19" data-cwnd="14"/>
+  <circle cx="1098.18" cy="370.00" r="4.6" class="point" data-round="20" data-cwnd="15"/>
+  <circle cx="1139.09" cy="354.00" r="4.6" class="point" data-round="21" data-cwnd="16"/>
+  <text x="382.27" y="447.00" transform="rotate(-63.000 382.27 447.00)">指数规律增长</text>
+  <line x1="398.64" y1="458.00" x2="412.95" y2="450.00" class="leader" />
+  <text x="865.91" y="100.00">网络拥塞（超时）</text>
+  <line x1="840.91" y1="116.00" x2="771.91" y2="219.00" class="leader" />
+  <line x1="836.91" y1="228.00" x2="836.91" y2="416.00" class="leader" marker-start="url(#arrow)"/>
+  <text x="869.91" y="322.00" transform="rotate(90.000 869.91 322.00)">“乘法减小”</text>
+  <text x="700.00" y="733.00" class="caption">慢开始和拥塞避免算法的实现过程</text>
+  <text x="700.00" y="768.00" class="note">按教材简化模型绘制；第 0 轮 cwnd=1，超时后 cwnd 回到 1，新门限为 24÷2=12。</text>
+</svg>

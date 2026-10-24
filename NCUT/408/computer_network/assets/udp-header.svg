@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="400" viewBox="0 0 1200 400" role="img" aria-labelledby="title desc">
+  <title id="title">UDP 数据报格式</title>
+  <desc id="desc">UDP 首部由源端口号、目的端口号、UDP 长度、检验和四个 16 位字段组成，共 8 字节。下方为可变长度数据部分。</desc>
+  <style>
+    text { font-family: "Noto Sans CJK SC", "Microsoft YaHei", sans-serif; fill: #243247; text-anchor: middle; }
+    .title { font-size: 26px; font-weight: 700; }
+    .label { font-size: 23px; }
+    .note { font-size: 17px; fill: #64748b; }
+    .bit { font-family: monospace; font-size: 13px; fill: #64748b; }
+    .flag { font-family: monospace; font-size: 17px; font-weight: 600; }
+    .field { stroke: #475569; stroke-width: 1.5; }
+  </style>
+  <rect width="1200" height="400" rx="12" fill="#fff"/>
+  <text x="560" y="40" class="title">UDP 数据报格式</text>
+  <text x="560" y="70" class="note">每行 32 bit（4B） · 上方数字为位编号</text>
+  <text x="95" y="99" class="bit">0</text>
+  <text x="125" y="99" class="bit">1</text>
+  <text x="155" y="99" class="bit">2</text>
+  <text x="185" y="99" class="bit">3</text>
+  <text x="215" y="99" class="bit">4</text>
+  <text x="245" y="99" class="bit">5</text>
+  <text x="275" y="99" class="bit">6</text>
+  <text x="305" y="99" class="bit">7</text>
+  <text x="335" y="99" class="bit">8</text>
+  <text x="365" y="99" class="bit">9</text>
+  <text x="395" y="99" class="bit">10</text>
+  <text x="425" y="99" class="bit">11</text>
+  <text x="455" y="99" class="bit">12</text>
+  <text x="485" y="99" class="bit">13</text>
+  <text x="515" y="99" class="bit">14</text>
+  <text x="545" y="99" class="bit">15</text>
+  <text x="575" y="99" class="bit">16</text>
+  <text x="605" y="99" class="bit">17</text>
+  <text x="635" y="99" class="bit">18</text>
+  <text x="665" y="99" class="bit">19</text>
+  <text x="695" y="99" class="bit">20</text>
+  <text x="725" y="99" class="bit">21</text>
+  <text x="755" y="99" class="bit">22</text>
+  <text x="785" y="99" class="bit">23</text>
+  <text x="815" y="99" class="bit">24</text>
+  <text x="845" y="99" class="bit">25</text>
+  <text x="875" y="99" class="bit">26</text>
+  <text x="905" y="99" class="bit">27</text>
+  <text x="935" y="99" class="bit">28</text>
+  <text x="965" y="99" class="bit">29</text>
+  <text x="995" y="99" class="bit">30</text>
+  <text x="1025" y="99" class="bit">31</text>
+  <rect x="80" y="112" width="480" height="72" fill="#f0f6ff" class="field"/>
+  <text x="320" y="144" class="label">源端口号</text>
+  <text x="320" y="171" class="note">16 bit</text>
+  <rect x="560" y="112" width="480" height="72" fill="#f0f6ff" class="field"/>
+  <text x="800" y="144" class="label">目的端口号</text>
+  <text x="800" y="171" class="note">16 bit</text>
+  <rect x="80" y="184" width="480" height="72" fill="#f0f6ff" class="field"/>
+  <text x="320" y="216" class="label">UDP 长度</text>
+  <text x="320" y="243" class="note">16 bit</text>
+  <rect x="560" y="184" width="480" height="72" fill="#f0f6ff" class="field"/>
+  <text x="800" y="216" class="label">检验和</text>
+  <text x="800" y="243" class="note">16 bit</text>
+  <rect x="80" y="256" width="960" height="80" fill="#f8fafc" class="field"/>
+  <text x="560" y="292" class="label">数据部分</text>
+  <text x="560" y="319" class="note">长度可变，图中高度仅作示意</text>
+  <path d="M1060 112 h16 V256 h-16" fill="none" stroke="#64748b" stroke-width="1.5"/>
+  <text x="1106" y="184" class="note" transform="rotate(90 1106 184)">固定首部 8B</text>
+  <text x="560" y="373" class="note">UDP 长度字段包含首部与数据，不包含 IP 首部</text>
+</svg>
