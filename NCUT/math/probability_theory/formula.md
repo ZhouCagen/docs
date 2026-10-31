@@ -7,6 +7,10 @@
 - [第三章：多维随机变量及其分布](#section-3)
 - [第四章：随机变量的数字特征](#section-4)
   - [常见分布的符号、期望与方差](#section-4-1)
+  - [协方差](#section-4-2)
+  - [相关系数与不相关](#section-4-3)
+  - [独立性与不相关性的关系](#section-4-4)
+  - [总体矩与混合矩](#section-4-5)
 - [第五章：大数定律和中心极限定理](#section-5)
   - [切比雪夫不等式](#section-5-1)
   - [依概率收敛](#section-5-2)
@@ -14,8 +18,25 @@
   - [大数定律及其条件对比](#section-5-4)
   - [中心极限定理：和与均值的正态近似](#section-5-5)
 - [第六章：数理统计的基本概念](#section-6)
+  - [样本均值及其期望与方差](#section-6-1)
+  - [样本方差与样本标准差](#section-6-2)
+  - [样本原点矩与样本中心矩](#section-6-3)
+  - [卡方分布的定义](#section-6-4)
+  - [t 分布的定义](#section-6-5)
+  - [F 分布的定义](#section-6-6)
+  - [单正态总体的常用统计分布](#section-6-7)
+  - [双正态总体的常用统计分布](#section-6-8)
 - [第七章：参数估计](#section-7)
+  - [点估计：矩估计](#section-7-1)
+  - [点估计：最大似然估计](#section-7-2)
+  - [估计量的评价标准](#section-7-3)
+  - [区间估计：正态总体方差已知时估计均值](#section-7-4)
+  - [区间估计：正态总体方差未知时估计均值](#section-7-5)
+  - [区间估计：正态总体均值未知时估计方差](#section-7-6)
+  - [区间估计：正态总体均值已知时估计方差](#section-7-7)
 - [第八章：假设检验](#section-8)
+  - [检验步骤与常用统计量](#section-8-1)
+  - [例题：正态总体均值的双侧检验](#section-8-2)
 
 ## <span style="color: #3498db;">第一章：随机事件与概率</span> <span id="section-1"></span>
 
@@ -1490,6 +1511,140 @@ $$
 
 **记忆：** 超几何分布令 $p=M/N$，期望仍为 $np$，方差是在二项分布的 $np(1-p)$ 上乘以不放回抽样的修正因子 $(N-n)/(N-1)$。
 
+### 协方差 <span id="section-4-2"></span>
+
+以下协方差及其性质在有关随机变量的二阶矩有限时使用。
+
+#### 定义与计算公式
+
+$$
+\boxed{\operatorname{Cov}(X,Y)=E\big[(X-E(X))(Y-E(Y))\big]}
+$$
+
+$$
+\boxed{\operatorname{Cov}(X,Y)=E(XY)-E(X)E(Y)}.
+$$
+
+#### 性质
+
+其中 $a,b,c$ 为常数。
+
+1. 对称性：$\operatorname{Cov}(X,Y)=\operatorname{Cov}(Y,X)$。
+2. 与自身的协方差：$\operatorname{Cov}(X,X)=D(X)$。
+3. 与常数的协方差：$\operatorname{Cov}(X,c)=0$。
+4. 常数可提出：$\operatorname{Cov}(aX,bY)=ab\operatorname{Cov}(X,Y)$。
+5. 对和可拆开：$\operatorname{Cov}(X_1+X_2,Y)=\operatorname{Cov}(X_1,Y)+\operatorname{Cov}(X_2,Y)$。
+6. 两边都是和时，逐项配对展开：
+
+$$
+\boxed{\begin{aligned}
+\operatorname{Cov}(X_1+X_2,Y_1+Y_2)
+&=\operatorname{Cov}(X_1,Y_1)+\operatorname{Cov}(X_1,Y_2)\\
+&\quad+\operatorname{Cov}(X_2,Y_1)+\operatorname{Cov}(X_2,Y_2).
+\end{aligned}}
+$$
+
+1. 若 $X,Y$ 相互独立，则 $\operatorname{Cov}(X,Y)=0$。
+
+**常用方法：先展开协方差，再利用独立性将相应项化为 $0$。**
+
+### 相关系数与不相关 <span id="section-4-3"></span>
+
+当 $0<D(X),D(Y)<\infty$ 时，定义相关系数
+
+$$
+\boxed{\rho_{XY}=\frac{\operatorname{Cov}(X,Y)}{\sqrt{D(X)}\sqrt{D(Y)}}}.
+$$
+
+#### 性质
+
+$$
+\boxed{|\rho_{XY}|\le1}.
+$$
+
+完全线性相关的充要条件：
+
+$$
+\boxed{|\rho_{XY}|=1
+\iff \text{存在常数 }a\ne0,b,\ P\{Y=aX+b\}=1}.
+$$
+
+其中 $a>0$ 时 $\rho_{XY}=1$，$a<0$ 时 $\rho_{XY}=-1$。
+
+**注意：$Y=aX+b$ 是以概率 $1$ 成立，不要求对所有样本点都成立。**
+
+#### 不相关
+
+$$
+\boxed{X,Y\text{ 不相关}\iff\rho_{XY}=0
+\iff\operatorname{Cov}(X,Y)=0
+\iff E(XY)=E(X)E(Y)}.
+$$
+
+上述含相关系数的等价关系要求两者方差均为正且有限。
+
+### 独立性与不相关性的关系 <span id="section-4-4"></span>
+
+独立性是分布的性质：对任意适当集合 $A,B$，有
+
+$$
+P\{X\in A,Y\in B\}=P\{X\in A\}P\{Y\in B\}.
+$$
+
+不相关是数字特征的性质，体现为 $E(XY)=E(X)E(Y)$。在方差为正且有限的条件下：
+
+- **独立 $\Longrightarrow$ 不相关**；不相关一般不能推出独立。
+- **相关 $\Longrightarrow$ 不独立**。
+- 若 $(X,Y)$ **联合服从二维正态分布**，则独立与不相关等价：
+
+$$
+\boxed{X,Y\text{ 相互独立}\iff\rho_{XY}=0}.
+$$
+
+**注意：仅有两个边缘分布分别为正态分布，不足以使用最后这条等价关系。**
+
+### 总体矩与混合矩 <span id="section-4-5"></span>
+
+以下各矩均要求相应期望存在且有限，$k,l$ 为正整数。
+
+#### k 阶原点矩
+
+$$
+\boxed{E(X^k)}.
+$$
+
+**一阶原点矩就是数学期望：**
+
+$$
+\boxed{E(X^1)=E(X)=\mu}.
+$$
+
+#### k 阶中心矩
+
+$$
+\boxed{E\big[(X-E(X))^k\big]}.
+$$
+
+一阶中心矩为 $0$。**二阶中心矩就是方差：**
+
+$$
+\boxed{E\big[(X-E(X))^2\big]=D(X)=\sigma^2}.
+$$
+
+#### k+l 阶混合原点矩
+
+$$
+\boxed{E(X^kY^l)}.
+$$
+
+#### k+l 阶混合中心矩
+
+$$
+\boxed{E\big[(X-E(X))^k(Y-E(Y))^l\big]}.
+$$
+
+当 $k=l=1$ 时，混合中心矩就是协方差 $\operatorname{Cov}(X,Y)$。
+
 ## <span style="color: #3498db;">第五章：大数定律和中心极限定理</span> <span id="section-5"></span>
 
 ### 切比雪夫不等式 <span id="section-5-1"></span>
@@ -1691,6 +1846,883 @@ $$
 
 ## <span style="color: #3498db;">第六章：数理统计的基本概念</span> <span id="section-6"></span>
 
+设 $X_1,X_2,\ldots,X_n$ 是来自总体 $X$ 的**简单随机样本**，即各样本变量相互独立且与总体同分布。记
+
+$$
+E(X)=\mu,\qquad D(X)=\sigma^2<\infty.
+$$
+
+大写 $X_i$ 表示样本随机变量，小写 $x_i$ 表示实际观测值；相应地，$\overline X$ 是样本均值统计量，$\overline x$ 是它的观测值。
+
+### 样本均值及其期望与方差 <span id="section-6-1"></span>
+
+$$
+\boxed{\overline X=\frac1n\sum_{i=1}^{n}X_i},\qquad
+\boxed{\overline x=\frac1n\sum_{i=1}^{n}x_i}.
+$$
+
+样本均值的期望与方差：
+
+$$
+\boxed{E(\overline X)=E(X)=\mu},\qquad
+\boxed{D(\overline X)=\frac{D(X)}n=\frac{\sigma^2}n}.
+$$
+
+由期望的线性性质和样本的独立性，
+
+$$
+E(\overline X)=\frac1n\sum_{i=1}^{n}E(X_i)=\mu,
+\qquad
+D(\overline X)=\frac1{n^2}\sum_{i=1}^{n}D(X_i)=\frac{\sigma^2}n.
+$$
+
+**记忆：均值的期望不变，方差除以 $n$。**
+
+### 样本方差与样本标准差 <span id="section-6-2"></span>
+
+当 $n\ge2$ 时，样本方差定义为
+
+$$
+\boxed{S^2=\frac1{n-1}\sum_{i=1}^{n}(X_i-\overline X)^2}.
+$$
+
+样本方差的期望等于总体方差：
+
+$$
+\boxed{E(S^2)=D(X)=\sigma^2}.
+$$
+
+因此 $S^2$ 是总体方差 $\sigma^2$ 的无偏估计。
+
+计算样本方差时，也可用展开式：
+
+$$
+\boxed{S^2=\frac1{n-1}\left(\sum_{i=1}^{n}X_i^2-n\overline X^{\,2}\right)}.
+$$
+
+这是因为 $\sum_{i=1}^{n}X_i=n\overline X$，所以
+
+$$
+\sum_{i=1}^{n}(X_i-\overline X)^2
+=\sum_{i=1}^{n}X_i^2-2\overline X\sum_{i=1}^{n}X_i+n\overline X^{\,2}
+=\sum_{i=1}^{n}X_i^2-n\overline X^{\,2}.
+$$
+
+**注意：样本方差的分母是 $n-1$，且括号内的整个差都要除以 $n-1$。**
+
+样本标准差是样本方差的算术平方根：
+
+$$
+\boxed{S=\sqrt{S^2}=\sqrt{\frac1{n-1}\sum_{i=1}^{n}(X_i-\overline X)^2}}.
+$$
+
+代入观测值时，将 $X_i,\overline X$ 换为 $x_i,\overline x$，分别得到 $s^2,s$。
+
+### 样本原点矩与样本中心矩 <span id="section-6-3"></span>
+
+对正整数 $k$，样本的 **$k$ 阶原点矩**记为 $A_k$：
+
+$$
+\boxed{A_k=\frac1n\sum_{i=1}^{n}X_i^k}.
+$$
+
+**样本均值 $\overline X$ 就是样本的一阶原点矩：**
+
+$$
+\boxed{A_1=\frac1n\sum_{i=1}^{n}X_i=\overline X}.
+$$
+
+样本的 **$k$ 阶中心矩**记为 $B_k$：
+
+$$
+\boxed{B_k=\frac1n\sum_{i=1}^{n}(X_i-\overline X)^k}.
+$$
+
+**记忆：原点矩以 $0$ 为中心，中心矩以样本均值 $\overline X$ 为中心；两者分母都是 $n$。** 这里的“矩”不是“距离”的“距”。
+
+常用关系：
+
+$$
+\boxed{A_1=\overline X},\qquad
+\boxed{B_1=0},\qquad
+\boxed{B_2=A_2-A_1^2}.
+$$
+
+当 $n\ge2$ 时，二阶样本中心矩与样本方差的关系为
+
+$$
+\boxed{S^2=\frac{n}{n-1}B_2},\qquad
+\boxed{B_2=\frac{n-1}{n}S^2}.
+$$
+
+**注意：$B_2$ 的分母是 $n$，$S^2$ 的分母是 $n-1$，二者不能混用。**
+
+### 卡方分布的定义 <span id="section-6-4"></span>
+
+设 $X_1,X_2,\ldots,X_n$ **相互独立**，且都服从标准正态分布：
+
+$$
+X_i\sim N(0,1),\qquad i=1,2,\ldots,n.
+$$
+
+则它们的平方和服从**自由度为 $n$ 的卡方分布**，记为
+
+$$
+\boxed{\chi^2=X_1^2+X_2^2+\cdots+X_n^2
+=\sum_{i=1}^{n}X_i^2\sim\chi^2(n)}.
+$$
+
+其中 $\chi$ 是希腊字母，$\chi^2(n)$ 也可记作 $\chi_n^2$；自由度 $n$ 就是参与平方求和的独立标准正态随机变量的个数。
+
+**记忆：独立、标准正态、平方求和；有 $n$ 项，自由度就是 $n$。**
+
+#### 卡方分布的密度图像
+
+![自由度为 1 的卡方分布密度示意图](assets/chi-square-density.svg)
+
+以 $n=1$ 为例：曲线位于正半轴，单调下降，向右拖尾。
+
+#### 卡方分布的性质
+
+##### 1. 期望与方差
+
+若 $Y\sim\chi^2(n)$，则
+
+$$
+\boxed{E(Y)=n},\qquad \boxed{D(Y)=2n}.
+$$
+
+也可沿用定义中的 $\chi^2$ 记号：
+
+$$
+\boxed{\chi^2\sim\chi^2(n)
+\quad\Longrightarrow\quad E(\chi^2)=n,\quad D(\chi^2)=2n}.
+$$
+
+**记忆：期望等于自由度，方差等于自由度的两倍。**
+
+##### 2. 可加性
+
+若 $U\sim\chi^2(n)$、$V\sim\chi^2(m)$，且 $U,V$ **相互独立**，则
+
+$$
+\boxed{U+V\sim\chi^2(n+m)}.
+$$
+
+沿用平方形式的记号，若 $X^2\sim\chi^2(n)$、$Y^2\sim\chi^2(m)$，且 $X,Y$ 相互独立，则 $X^2,Y^2$ 也相互独立，因此
+
+$$
+\boxed{X^2+Y^2\sim\chi^2(n+m)}.
+$$
+
+若原来的自由度分别记为 $n_1,n_2$，则相加后的自由度写作 $n_1+n_2$。
+
+**记忆：独立的卡方变量相加，仍为卡方分布，自由度相加。**
+
+#### 卡方分布的上侧分位点
+
+设 $Y\sim\chi^2(n)$，$0<\alpha<1$。若 $\chi^2_{\alpha}(n)$ 满足
+
+$$
+\boxed{P\{Y>\chi^2_{\alpha}(n)\}=\alpha},
+$$
+
+则称 $\chi^2_{\alpha}(n)$ 为自由度为 $n$ 的卡方分布的**上侧 $\alpha$ 分位点**。
+
+图形含义：在横轴上取 $\chi^2_{\alpha}(n)$，该点**右侧**密度曲线下的面积为 $\alpha$，左侧面积为 $1-\alpha$，即
+
+$$
+\boxed{P\{Y\le\chi^2_{\alpha}(n)\}=1-\alpha},\qquad
+\boxed{\int_{\chi^2_{\alpha}(n)}^{+\infty}f(x)\,\mathrm dx=\alpha}.
+$$
+
+**记忆：下标 $\alpha$ 表示右尾概率；$\alpha$ 越小，分位点越靠右。** 查表时注意表格采用的是右尾概率还是左侧累计概率。
+
+### t 分布的定义 <span id="section-6-5"></span>
+
+设
+
+$$
+X\sim N(0,1),\qquad Y\sim\chi^2(n),
+$$
+
+且 $X,Y$ **相互独立**，则随机变量
+
+$$
+\boxed{T=\frac{X}{\sqrt{Y/n}}\sim t(n)}
+$$
+
+服从**自由度为 $n$ 的 $t$ 分布**，也称学生氏 $t$ 分布。
+
+**记忆：标准正态变量，除以“独立卡方变量除以自由度”的平方根。** 分母是 $\sqrt{Y/n}$，自由度 $n$ 来自分母中的卡方分布。
+
+#### t 分布的密度图像
+
+![自由度为 1 的 t 分布密度示意图](assets/t-density.svg)
+
+以 $n=1$ 为例：曲线呈钟形，关于 $y$ 轴对称。
+
+#### t 分布的上侧分位点
+
+与卡方分布一样，采用**右尾概率**定义。设 $T\sim t(n)$，$0<\alpha<1$，则上侧 $\alpha$ 分位点 $t_{\alpha}(n)$ 满足
+
+$$
+\boxed{P\{T>t_{\alpha}(n)\}=\alpha},\qquad
+\boxed{P\{T\le t_{\alpha}(n)\}=1-\alpha}.
+$$
+
+即 $t_{\alpha}(n)$ **右侧曲线下的面积为 $\alpha$**。
+
+#### t 分布的性质
+
+##### 1. 上侧分位点的对称关系
+
+由密度曲线关于 $y$ 轴的对称性，有
+
+$$
+\boxed{t_{1-\alpha}(n)=-t_{\alpha}(n)},\qquad
+\boxed{t_{1/2}(n)=0}.
+$$
+
+特别地，$0<\alpha<1/2$ 时，$t_{\alpha}(n)>0$。双侧总尾概率为 $\alpha$ 时，左右两尾各占 $\alpha/2$，因此
+
+$$
+\boxed{P\{|T|>t_{\alpha/2}(n)\}=\alpha}.
+$$
+
+##### 2. 平方后服从 F 分布
+
+若 $T\sim t(n)$，由定义可写为
+
+$$
+T=\frac{X}{\sqrt{Y/n}},\qquad
+X\sim N(0,1),\quad Y\sim\chi^2(n),\quad X,Y\text{ 相互独立}.
+$$
+
+两边平方，得到
+
+$$
+\boxed{T^2=\frac{X^2}{Y/n}
+=\frac{X^2/1}{Y/n}\sim F(1,n)}.
+$$
+
+这是因为 $X^2\sim\chi^2(1)$，且 $X^2,Y$ 相互独立；两个独立卡方变量分别除以各自的自由度后，其比值服从 $F$ 分布。
+
+**记忆：$t(n)$ 变量的平方服从 $F(1,n)$，分子自由度为 $1$，分母自由度为 $n$。** 注意分母是整个 $Y/n$，所以 $T^2=nX^2/Y$。
+
+### F 分布的定义 <span id="section-6-6"></span>
+
+设
+
+$$
+X\sim\chi^2(m),\qquad Y\sim\chi^2(n),
+$$
+
+且 $X,Y$ **相互独立**，则随机变量
+
+$$
+\boxed{F=\frac{X/m}{Y/n}\sim F(m,n)}
+$$
+
+服从自由度为 $(m,n)$ 的 **$F$ 分布**。其中 $m$ 是**分子自由度**，$n$ 是**分母自由度**，顺序不能随意交换。
+
+**记忆：两个独立卡方变量，各自除以自己的自由度，再作比值。** $F$ 变量几乎必然大于 $0$。
+
+#### F 分布的密度图像
+
+![F(1,1) 分布密度示意图](assets/f-density.svg)
+
+以 $F(1,1)$ 为例：曲线位于正半轴，单调下降，向右拖尾。
+
+#### F 分布的上侧分位点
+
+设 $F\sim F(m,n)$，$0<\alpha<1$，上侧 $\alpha$ 分位点 $F_{\alpha}(m,n)$ 满足
+
+$$
+\boxed{P\{F>F_{\alpha}(m,n)\}=\alpha}.
+$$
+
+即 $F_{\alpha}(m,n)$ **右侧曲线下的面积为 $\alpha$**，左侧面积为 $1-\alpha$。
+
+#### F 分布的性质
+
+##### 1. 倒数性质
+
+$$
+\boxed{F\sim F(m,n)\quad\Longrightarrow\quad\frac1F\sim F(n,m)}.
+$$
+
+因为取倒数后，$\frac{X/m}{Y/n}$ 变为 $\frac{Y/n}{X/m}$，所以分子与分母的自由度交换。
+
+##### 2. 上侧分位点的倒数关系
+
+$$
+\boxed{F_{1-\alpha}(m,n)=\frac1{F_{\alpha}(n,m)}},\qquad 0<\alpha<1.
+$$
+
+**记忆：分位点取倒数，尾概率换成 $1-\alpha$，两个自由度交换。** 这是由倒数性质及上侧分位点定义得到的。
+
+### 单正态总体的常用统计分布 <span id="section-6-7"></span>
+
+设 $X_1,\ldots,X_n$ 是来自正态总体 $N(\mu,\sigma^2)$ 的简单随机样本，$\sigma^2>0$、$n\ge2$，记
+
+$$
+\overline X=\frac1n\sum_{i=1}^{n}X_i,\qquad
+S^2=\frac1{n-1}\sum_{i=1}^{n}(X_i-\overline X)^2.
+$$
+
+#### 1. 样本均值与样本方差独立
+
+$$
+\boxed{\overline X\text{ 与 }S^2\text{ 相互独立}}.
+$$
+
+#### 2. 样本均值的正态分布
+
+$$
+\boxed{\overline X\sim N\left(\mu,\frac{\sigma^2}{n}\right)},\qquad
+\boxed{\frac{\overline X-\mu}{\sigma/\sqrt n}\sim N(0,1)}.
+$$
+
+#### 3. 围绕总体均值的平方和
+
+$$
+\boxed{\sum_{i=1}^{n}\left(\frac{X_i-\mu}{\sigma}\right)^2
+=\frac1{\sigma^2}\sum_{i=1}^{n}(X_i-\mu)^2\sim\chi^2(n)}.
+$$
+
+#### 4. 围绕样本均值的平方和
+
+$$
+\boxed{\frac1{\sigma^2}\sum_{i=1}^{n}(X_i-\overline X)^2
+=\frac{(n-1)S^2}{\sigma^2}\sim\chi^2(n-1)}.
+$$
+
+**记忆：减总体均值 $\mu$，自由度为 $n$；减样本均值 $\overline X$，自由度为 $n-1$。**
+
+#### 5. 用样本标准差构造 t 统计量
+
+$$
+\boxed{\frac{(\overline X-\mu)/(\sigma/\sqrt n)}
+{\sqrt{\big[(n-1)S^2/\sigma^2\big]/(n-1)}}
+=\frac{\overline X-\mu}{S/\sqrt n}\sim t(n-1)}.
+$$
+
+### 双正态总体的常用统计分布 <span id="section-6-8"></span>
+
+设 $X_1,\ldots,X_{n_1}$ 与 $Y_1,\ldots,Y_{n_2}$ 分别是来自 $N(\mu_1,\sigma_1^2)$ 与 $N(\mu_2,\sigma_2^2)$ 的简单随机样本，且**两个样本之间相互独立**。设 $\sigma_1^2,\sigma_2^2>0$，$n_1,n_2\ge2$，记
+
+$$
+\overline X=\frac1{n_1}\sum_{i=1}^{n_1}X_i,\qquad
+S_1^2=\frac1{n_1-1}\sum_{i=1}^{n_1}(X_i-\overline X)^2,
+$$
+
+$$
+\overline Y=\frac1{n_2}\sum_{j=1}^{n_2}Y_j,\qquad
+S_2^2=\frac1{n_2-1}\sum_{j=1}^{n_2}(Y_j-\overline Y)^2.
+$$
+
+#### 1. 两个样本均值的和与差
+
+$$
+\boxed{\overline X\pm\overline Y\sim
+N\left(\mu_1\pm\mu_2,\frac{\sigma_1^2}{n_1}+\frac{\sigma_2^2}{n_2}\right)}.
+$$
+
+特别地，均值差标准化后有
+
+$$
+\boxed{\frac{(\overline X-\overline Y)-(\mu_1-\mu_2)}
+{\sqrt{\sigma_1^2/n_1+\sigma_2^2/n_2}}\sim N(0,1)}.
+$$
+
+**记忆：独立时，无论均值相加还是相减，方差都相加。**
+
+#### 2. 两个独立卡方统计量相加
+
+$$
+\boxed{\frac{(n_1-1)S_1^2}{\sigma_1^2}
++\frac{(n_2-1)S_2^2}{\sigma_2^2}
+\sim\chi^2(n_1+n_2-2)}.
+$$
+
+#### 3. 围绕总体均值构造 F 统计量
+
+$$
+\boxed{\frac{\displaystyle\frac1{n_1\sigma_1^2}\sum_{i=1}^{n_1}(X_i-\mu_1)^2}
+{\displaystyle\frac1{n_2\sigma_2^2}\sum_{j=1}^{n_2}(Y_j-\mu_2)^2}
+\sim F(n_1,n_2)}.
+$$
+
+#### 4. 用样本方差构造 F 统计量
+
+$$
+\boxed{\frac{\big[(n_1-1)S_1^2/\sigma_1^2\big]/(n_1-1)}
+{\big[(n_2-1)S_2^2/\sigma_2^2\big]/(n_2-1)}
+=\frac{S_1^2/\sigma_1^2}{S_2^2/\sigma_2^2}
+=\frac{S_1^2/S_2^2}{\sigma_1^2/\sigma_2^2}
+\sim F(n_1-1,n_2-1)}.
+$$
+
+#### 5. 等方差时的合并样本 t 统计量
+
+**额外要求：$\sigma_1^2=\sigma_2^2=\sigma^2$。** 定义合并样本方差
+
+$$
+\boxed{S_w^2=\frac{(n_1-1)S_1^2+(n_2-1)S_2^2}{n_1+n_2-2}},
+\qquad S_w=\sqrt{S_w^2}.
+$$
+
+此时
+
+$$
+\boxed{T=\frac{(\overline X-\overline Y)-(\mu_1-\mu_2)}
+{S_w\sqrt{1/n_1+1/n_2}}\sim t(n_1+n_2-2)}.
+$$
+
+它来自标准正态变量除以独立卡方变量的标准化平方根：
+
+$$
+T=\frac{\displaystyle\frac{(\overline X-\overline Y)-(\mu_1-\mu_2)}
+{\sqrt{\sigma^2/n_1+\sigma^2/n_2}}}
+{\displaystyle\sqrt{\frac{(n_1-1)S_1^2/\sigma^2+(n_2-1)S_2^2/\sigma^2}
+{n_1+n_2-2}}}.
+$$
+
+**注意：该合并样本公式需要两个总体方差相等。**
+
 ## <span style="color: #3498db;">第七章：参数估计</span> <span id="section-7"></span>
 
+### 点估计 <span id="section-7-1"></span>
+
+用样本构造统计量 $\widehat\theta$ 来估计总体的未知参数 $\theta$，称为**点估计**。
+
+#### 矩估计
+
+**本质：用样本矩估计总体矩，令二者相等建立方程，再解出未知参数。** 可以使用原点矩，也可以使用中心矩。
+
+##### 1. 原点矩法
+
+总体的 $j$ 阶原点矩为 $E(X^j)$，样本的 $j$ 阶原点矩为 $A_j=\frac1n\sum_{i=1}^{n}X_i^j$。矩估计方程为
+
+$$
+\boxed{E(X^j)=\frac1n\sum_{i=1}^{n}X_i^j},\qquad j=1,2,\ldots.
+$$
+
+代入观测值时写为
+
+$$
+\boxed{E(X^j)=\frac1n\sum_{i=1}^{n}x_i^j}.
+$$
+
+常用前两阶：
+
+$$
+\boxed{E(X)=\overline X},\qquad
+\boxed{E(X^2)=\frac1n\sum_{i=1}^{n}X_i^2}.
+$$
+
+##### 2. 中心矩法
+
+总体的 $j$ 阶中心矩为 $E[(X-E(X))^j]$，样本的 $j$ 阶中心矩为 $B_j=\frac1n\sum_{i=1}^{n}(X_i-\overline X)^j$。对应的矩估计方程为
+
+$$
+\boxed{E\big[(X-E(X))^j\big]
+=\frac1n\sum_{i=1}^{n}(X_i-\overline X)^j}.
+$$
+
+其中一阶中心矩恒为 $0$，不能单独用来确定参数。常用二阶中心矩，即令
+
+$$
+\boxed{D(X)=B_2=\frac1n\sum_{i=1}^{n}(X_i-\overline X)^2}.
+$$
+
+**注意：这里的等号用于建立估计方程，并非总体矩与样本矩恒等。** 有多个未知参数时，需要选取足够多、能确定参数的矩方程；样本二阶中心矩的分母为 $n$。
+
+#### 最大似然估计 <span id="section-7-2"></span>
+
+**思想：已观察到样本 $x_1,\ldots,x_n$，选择使这组样本出现的概率最大的参数值 $\theta$。** 样本观测值固定，把似然函数看作 $\theta$ 的函数。
+
+##### 离散型总体
+
+设总体的分布律为 $p(x;\theta)=P_{\theta}\{X=x\}$，$X_1,\ldots,X_n$ 为简单随机样本，观测值为 $x_1,\ldots,x_n$。
+
+**第一步：构造似然函数。** 由样本相互独立，
+
+$$
+\boxed{\begin{aligned}
+L(\theta)
+&=P_{\theta}\{X_1=x_1,\ldots,X_n=x_n\}\\
+&=\prod_{i=1}^{n}P_{\theta}\{X_i=x_i\}
+=\prod_{i=1}^{n}p(x_i;\theta).
+\end{aligned}}
+$$
+
+**第二步：求使 $L(\theta)$ 最大的参数值。** 若在参数范围 $\Theta$ 内，$\widehat\theta$ 满足
+
+$$
+\boxed{L(\widehat\theta)=\max_{\theta\in\Theta}L(\theta)},
+$$
+
+则称 $\widehat\theta$ 为 $\theta$ 的**最大似然估计值**；将其中的观测值 $x_i$ 换为样本变量 $X_i$，得到最大似然估计量。
+
+**常用技巧：先取自然对数，将连乘化为求和。** 当 $L(\theta)>0$ 时，定义对数似然函数
+
+$$
+\boxed{\ell(\theta)=\ln L(\theta)=\sum_{i=1}^{n}\ln p(x_i;\theta)}.
+$$
+
+因为 $\ln$ 严格递增，最大化 $L(\theta)$ 与最大化 $\ell(\theta)$ 等价。对可导的内部候选点，通常先解
+
+$$
+\boxed{\ell'(\theta)=0},
+$$
+
+再检查是否取得最大值，并比较参数边界。**导数为 $0$ 只是候选条件，最终要求似然函数在允许的参数范围内最大。**
+
+##### 连续型总体
+
+设总体 $X$ 的概率密度为 $f(x;\theta)$，$X_1,\ldots,X_n$ 为简单随机样本，观测值为 $x_1,\ldots,x_n$。
+
+**第一步：构造似然函数。** 由样本相互独立，联合密度为各密度的乘积：
+
+$$
+\boxed{L(\theta)=f(x_1;\theta)f(x_2;\theta)\cdots f(x_n;\theta)
+=\prod_{i=1}^{n}f(x_i;\theta)}.
+$$
+
+这里使用的是**密度的乘积**。连续型随机变量取某个指定值的概率为 $0$，因此不能把这个乘积写成样本恰好取这些值的概率。
+
+**第二步：依旧求使 $L(\theta)$ 最大的参数值。** 通常在 $L(\theta)>0$ 时先取对数：
+
+$$
+\boxed{\ell(\theta)=\ln L(\theta)=\sum_{i=1}^{n}\ln f(x_i;\theta)},
+$$
+
+再求最大值；可导的内部候选点可由 $\ell'(\theta)=0$ 求出，最后检查最大值及参数边界。
+
+**注意：若密度的取值范围依赖 $\theta$，要保留样本对 $\theta$ 的限制，再在允许范围内求最大值。**
+
+##### 最大似然估计量与估计值的区别
+
+**估计量用大写样本变量 $X_i$ 表示；估计值用小写观测数据 $x_i$ 表示。** 例如，某题求得的最大似然估计为样本均值时：
+
+| 题目要求         | 最后答案                                                           |
+| ---------------- | ------------------------------------------------------------------ |
+| 求最大似然估计量 | $\displaystyle\widehat\theta=\frac1n\sum_{i=1}^{n}X_i=\overline X$ |
+| 求最大似然估计值 | $\displaystyle\widehat\theta=\frac1n\sum_{i=1}^{n}x_i=\overline x$ |
+
+估计量是统计量，代入实际观测数据后得到估计值。**这里的样本均值仅为示例，最大似然估计的具体形式由总体分布决定。**
+
+### 估计量的评价标准 <span id="section-7-3"></span>
+
+#### 1. 无偏性
+
+若对参数范围内的每个 $\theta$，都有
+
+$$
+\boxed{E_{\theta}(\widehat\theta)=\theta},
+$$
+
+则称 $\widehat\theta$ 是 $\theta$ 的**无偏估计量**。即估计量的期望等于被估计的真实参数。
+
+#### 2. 有效性
+
+设 $\widehat\theta_1,\widehat\theta_2$ 都是 $\theta$ 的**无偏估计量**，方差均有限。若对所有允许的 $\theta$，
+
+$$
+\boxed{D_{\theta}(\widehat\theta_1)\le D_{\theta}(\widehat\theta_2)},
+$$
+
+且至少在一个参数值处严格小于，则称 $\widehat\theta_1$ 比 $\widehat\theta_2$ **更有效**。特别地，若始终有 $D_{\theta}(\widehat\theta_1)<D_{\theta}(\widehat\theta_2)$，则前者更有效。
+
+**记忆：比较无偏估计量，方差越小，估计越集中，也就越有效。**
+
+#### 3. 一致性（相合性）
+
+设 $\widehat\theta_n$ 是基于容量为 $n$ 的样本构造的估计量。若对每个允许的 $\theta$ 及任意 $\varepsilon>0$，都有
+
+$$
+\boxed{\lim_{n\to\infty}P_{\theta}\big\{|\widehat\theta_n-\theta|<\varepsilon\big\}=1},
+$$
+
+即
+
+$$
+\boxed{\widehat\theta_n\xrightarrow{P}\theta},
+$$
+
+则称 $\widehat\theta_n$ 是 $\theta$ 的**一致估计量（相合估计量）**。
+
+**记忆：样本量越大，估计值落在真实参数任意小邻域内的概率趋于 $1$。**
+
+### 区间估计 <span id="section-7-4"></span>
+
+#### 置信区间与置信度
+
+设未知参数为 $\theta$，用样本构造区间 $[\widehat\theta_1,\widehat\theta_2]$。若
+
+$$
+\boxed{P_{\theta}\{\widehat\theta_1\le\theta\le\widehat\theta_2\}=\alpha},
+\qquad 0<\alpha<1,
+$$
+
+则称其为 $\theta$ 的**置信度为 $\alpha$ 的置信区间**。这里 $\theta$ 是固定的未知参数，区间端点随样本变化；置信度表示反复抽样时，这种方法构造的区间覆盖真参数的比例。
+
+**本节按置信度为 $\alpha$ 记号书写。** 若题目将置信度记为 $1-\alpha$，则应相应改用两侧各 $\alpha/2$ 的尾概率。
+
+#### 对均值 μ 的区间估计
+
+##### 1. 方差已知
+
+设 $X_1,\ldots,X_n$ 是来自 $N(\mu,\sigma^2)$ 的简单随机样本，**$\sigma^2$ 已知，$\mu$ 未知**，要求 $\mu$ 的置信度为 $\alpha$ 的双侧置信区间。
+
+**第一步：构造标准正态统计量。**
+
+$$
+\boxed{U=\frac{\overline X-\mu}{\sigma/\sqrt n}\sim N(0,1)}.
+$$
+
+**第二步：令中间概率为 $\alpha$。** 由对称性，左右两侧剩余概率各为 $\frac{1-\alpha}{2}$。设标准正态分布的上侧 $\beta$ 分位点满足
+
+$$
+P\{U>u_{\beta}\}=\beta.
+$$
+
+于是
+
+$$
+\boxed{P\left\{-u_{\frac{1-\alpha}{2}}\le U\le u_{\frac{1-\alpha}{2}}\right\}=\alpha}.
+$$
+
+**注意：下标是 $(1-\alpha)/2$，不是 $1-\alpha/2$。**
+
+**第三步：代入 $U$，将不等式整理成关于 $\mu$ 的区间。**
+
+$$
+P\left\{-u_{\frac{1-\alpha}{2}}
+\le\frac{\overline X-\mu}{\sigma/\sqrt n}
+\le u_{\frac{1-\alpha}{2}}\right\}=\alpha,
+$$
+
+即
+
+$$
+\boxed{P\left\{\overline X-u_{\frac{1-\alpha}{2}}\frac{\sigma}{\sqrt n}
+\le\mu\le
+\overline X+u_{\frac{1-\alpha}{2}}\frac{\sigma}{\sqrt n}\right\}=\alpha}.
+$$
+
+因此，$\mu$ 的置信度为 $\alpha$ 的置信区间为
+
+$$
+\boxed{\left[\overline X-u_{\frac{1-\alpha}{2}}\frac{\sigma}{\sqrt n},\quad
+\overline X+u_{\frac{1-\alpha}{2}}\frac{\sigma}{\sqrt n}\right]}.
+$$
+
+代入实际观测值后，将 $\overline X$ 换成 $\overline x$ 即可。
+
+**记忆：样本均值 $\pm$ 上侧分位点 $\times$ 均值的标准差。**
+
+##### 2. 方差未知 <span id="section-7-5"></span>
+
+设 $X_1,\ldots,X_n$ 是来自 $N(\mu,\sigma^2)$ 的简单随机样本，$n\ge2$，**$\sigma^2$ 未知**。用样本标准差 $S$ 替代 $\sigma$，要求 $\mu$ 的置信度为 $1-\alpha$ 的双侧置信区间。
+
+**第一步：构造 t 统计量。**
+
+$$
+\boxed{T=\frac{\overline X-\mu}{S/\sqrt n}\sim t(n-1)}.
+$$
+
+**第二步：令中间概率为 $1-\alpha$。** 左右尾概率各为 $\alpha/2$，所以
+
+$$
+\boxed{P\left\{-t_{\alpha/2}(n-1)\le T\le t_{\alpha/2}(n-1)\right\}=1-\alpha}.
+$$
+
+**第三步：代入 $T$，整理成关于 $\mu$ 的区间。**
+
+$$
+P\left\{-t_{\alpha/2}(n-1)
+\le\frac{\overline X-\mu}{S/\sqrt n}
+\le t_{\alpha/2}(n-1)\right\}=1-\alpha,
+$$
+
+即
+
+$$
+\boxed{P\left\{\overline X-t_{\alpha/2}(n-1)\frac S{\sqrt n}
+\le\mu\le
+\overline X+t_{\alpha/2}(n-1)\frac S{\sqrt n}\right\}=1-\alpha}.
+$$
+
+因此，$\mu$ 的置信度为 $1-\alpha$ 的置信区间为
+
+$$
+\boxed{\left[\overline X-t_{\alpha/2}(n-1)\frac S{\sqrt n},\quad
+\overline X+t_{\alpha/2}(n-1)\frac S{\sqrt n}\right]}.
+$$
+
+代入实际观测值时，将 $\overline X,S$ 换成 $\overline x,s$。
+
+**记忆：方差未知，用 $S$ 替代 $\sigma$，用自由度为 $n-1$ 的 $t$ 分位点；置信度为 $1-\alpha$，上侧分位点下标为 $\alpha/2$。**
+
+#### 对方差 σ² 的区间估计 <span id="section-7-6"></span>
+
+##### 1. 均值未知
+
+设 $X_1,\ldots,X_n$ 是来自正态总体 $N(\mu,\sigma^2)$ 的简单随机样本，$n\ge2$，**$\mu$ 未知**，求 $\sigma^2$ 的置信度为 $1-\alpha$ 的双侧置信区间。
+
+**第一步：构造卡方统计量。**
+
+$$
+\boxed{Q=\frac{(n-1)S^2}{\sigma^2}\sim\chi^2(n-1)}.
+$$
+
+**第二步：令中间概率为 $1-\alpha$。** 左右两尾各为 $\alpha/2$。按上侧分位点的定义，左端点为 $\chi^2_{1-\alpha/2}(n-1)$，右端点为 $\chi^2_{\alpha/2}(n-1)$，因此
+
+$$
+\boxed{P\left\{\chi^2_{1-\alpha/2}(n-1)
+\le Q\le\chi^2_{\alpha/2}(n-1)\right\}=1-\alpha}.
+$$
+
+**第三步：代入 $Q$，整理成关于 $\sigma^2$ 的区间。**
+
+$$
+P\left\{\chi^2_{1-\alpha/2}(n-1)
+\le\frac{(n-1)S^2}{\sigma^2}
+\le\chi^2_{\alpha/2}(n-1)\right\}=1-\alpha,
+$$
+
+即
+
+$$
+\boxed{P\left\{\frac{(n-1)S^2}{\chi^2_{\alpha/2}(n-1)}
+\le\sigma^2\le
+\frac{(n-1)S^2}{\chi^2_{1-\alpha/2}(n-1)}\right\}=1-\alpha}.
+$$
+
+所以 $\sigma^2$ 的置信度为 $1-\alpha$ 的置信区间为
+
+$$
+\boxed{\left[\frac{(n-1)S^2}{\chi^2_{\alpha/2}(n-1)},\quad
+\frac{(n-1)S^2}{\chi^2_{1-\alpha/2}(n-1)}\right]}.
+$$
+
+代入实际观测值时，将 $S^2$ 换成 $s^2$。
+
+**记忆：先夹住卡方统计量，再取倒数整理；置信区间下限除以较大的卡方分位点，上限除以较小的卡方分位点。**
+
+##### 2. 均值已知 <span id="section-7-7"></span>
+
+设 $X_1,\ldots,X_n$ 是来自正态总体 $N(\mu,\sigma^2)$ 的简单随机样本，**$\mu$ 已知**，求 $\sigma^2$ 的置信度为 $1-\alpha$ 的双侧置信区间。
+
+**第一步：构造卡方统计量。**
+
+$$
+\boxed{Q=\sum_{i=1}^{n}\left(\frac{X_i-\mu}{\sigma}\right)^2
+=\frac{\sum_{i=1}^{n}(X_i-\mu)^2}{\sigma^2}\sim\chi^2(n)}.
+$$
+
+**第二步：令中间概率为 $1-\alpha$。**
+
+$$
+\boxed{P\left\{\chi^2_{1-\alpha/2}(n)
+\le\frac{\sum_{i=1}^{n}(X_i-\mu)^2}{\sigma^2}
+\le\chi^2_{\alpha/2}(n)\right\}=1-\alpha}.
+$$
+
+**第三步：整理成关于 $\sigma^2$ 的区间。** 因此 $\sigma^2$ 的置信度为 $1-\alpha$ 的置信区间为
+
+$$
+\boxed{\left[\frac{\sum_{i=1}^{n}(X_i-\mu)^2}{\chi^2_{\alpha/2}(n)},\quad
+\frac{\sum_{i=1}^{n}(X_i-\mu)^2}{\chi^2_{1-\alpha/2}(n)}\right]}.
+$$
+
+代入实际观测值时，将 $X_i$ 换成 $x_i$。
+
+**记忆：$\mu$ 已知，用 $\sum(X_i-\mu)^2$，自由度为 $n$；$\mu$ 未知，用 $(n-1)S^2$，自由度为 $n-1$。**
+
 ## <span style="color: #3498db;">第八章：假设检验</span> <span id="section-8"></span>
+
+### 检验步骤与常用统计量 <span id="section-8-1"></span>
+
+假设检验可以针对总体均值 $\mu$，也可以针对总体方差 $\sigma^2$。以下以正态总体的**双侧检验**为例。
+
+#### 1. 提出原假设与备择假设
+
+- 对均值检验：$H_0:\mu=\mu_0$，$H_1:\mu\ne\mu_0$。
+- 对方差检验：$H_0:\sigma^2=\sigma_0^2$，$H_1:\sigma^2\ne\sigma_0^2$。
+
+其中 $H_0$ 称为原假设（原始假设），$H_1$ 称为备择假设。
+
+#### 2. 确定显著性水平 α，选择统计量
+
+设 $X_1,\ldots,X_n$ 是来自 $N(\mu,\sigma^2)$ 的简单随机样本。**在 $H_0$ 成立时**，常用统计量为：
+
+| 检验对象与条件              | 统计量及其分布                                                              |
+| --------------------------- | --------------------------------------------------------------------------- |
+| 检验 $\mu$，$\sigma^2$ 已知 | $\displaystyle U=\frac{\overline X-\mu_0}{\sigma/\sqrt n}\sim N(0,1)$       |
+| 检验 $\mu$，$\sigma^2$ 未知 | $\displaystyle T=\frac{\overline X-\mu_0}{S/\sqrt n}\sim t(n-1)$            |
+| 检验 $\sigma^2$，$\mu$ 未知 | $\displaystyle Q=\frac{(n-1)S^2}{\sigma_0^2}\sim\chi^2(n-1)$                |
+| 检验 $\sigma^2$，$\mu$ 已知 | $\displaystyle Q=\frac{\sum_{i=1}^{n}(X_i-\mu)^2}{\sigma_0^2}\sim\chi^2(n)$ |
+
+显著性水平 $\alpha$ 控制“$H_0$ 本来成立，却将它拒绝”的概率。
+
+#### 3. 确定接受域与拒绝域
+
+与区间估计同样，取中间概率为 $1-\alpha$ 的区域作为接受域，两侧各留 $\alpha/2$ 作为拒绝域。以下分位点均采用**上侧分位点**记号。
+
+| 统计量             | 接受域（不拒绝域）                                       | 拒绝域                                                     |
+| ------------------ | -------------------------------------------------------- | ---------------------------------------------------------- |
+| $U\sim N(0,1)$     | $\lvert U\rvert\le u_{\alpha/2}$                         | $\lvert U\rvert>u_{\alpha/2}$                              |
+| $T\sim t(n-1)$     | $\lvert T\rvert\le t_{\alpha/2}(n-1)$                    | $\lvert T\rvert>t_{\alpha/2}(n-1)$                         |
+| $Q\sim\chi^2(\nu)$ | $\chi^2_{1-\alpha/2}(\nu)\le Q\le\chi^2_{\alpha/2}(\nu)$ | $Q<\chi^2_{1-\alpha/2}(\nu)$ 或 $Q>\chi^2_{\alpha/2}(\nu)$ |
+
+卡方统计量的自由度 $\nu$ 按上表取 $n-1$ 或 $n$。
+
+#### 4. 代入样本，作出结论
+
+- 落入接受域：**不拒绝 $H_0$**，说明目前样本没有提供足够的反对证据。
+- 落入拒绝域：**在显著性水平 $\alpha$ 下拒绝 $H_0$**，支持备择假设。
+
+**与区间估计的联系：对于对应的双侧检验，假设参数值落在置信度为 $1-\alpha$ 的置信区间内，则不拒绝 $H_0$；落在区间外，则拒绝 $H_0$。**
+
+### 例题：正态总体均值的双侧检验 <span id="section-8-2"></span>
+
+设产品重量 $X\sim N(\mu,6^2)$，总体标准差已知为 $6$。随机抽取 $36$ 件，测得样本均值 $\overline x=52.5$。在显著性水平 $\alpha=0.05$ 下，检验总体均值是否为 $50$。
+
+**① 提出假设。**
+
+$$
+H_0:\mu=50,\qquad H_1:\mu\ne50.
+$$
+
+**② 确定统计量。** $\sigma=6$ 已知，在 $H_0$ 成立时，
+
+$$
+U=\frac{\overline X-50}{6/\sqrt{36}}\sim N(0,1).
+$$
+
+**③ 确定拒绝域。** $u_{\alpha/2}=u_{0.025}\approx1.96$，故拒绝域为
+
+$$
+|U|>1.96.
+$$
+
+**④ 代入数据并下结论。**
+
+$$
+u=\frac{52.5-50}{6/\sqrt{36}}=2.5>1.96.
+$$
+
+因此，**在显著性水平 $0.05$ 下拒绝 $H_0$，认为总体均值与 $50$ 有显著差异。**
+
+也可用对应的 $95\%$ 置信区间判断：
+
+$$
+\left[52.5-1.96\frac6{\sqrt{36}},\quad52.5+1.96\frac6{\sqrt{36}}\right]
+=[50.54,54.46].
+$$
+
+假设值 $50$ 不在区间内，因此同样拒绝 $H_0$。
