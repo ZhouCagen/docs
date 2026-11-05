@@ -1,6 +1,6 @@
 # 高等数学公式笔记
 
-**知识点目录**
+## **知识点目录**
 
 - [第一部分：函数、极限、连续](#section-1)
   - [复合函数的奇偶性](#section-1-1)
@@ -71,8 +71,6 @@
   - [复合函数求导与“位置”记号](#section-4-6)
   - [隐函数求导公式](#section-4-7)
   - [二元函数的无条件极值](#section-4-8)
-  - [方向导数：先将方向向量单位化](#section-4-9)
-  - [梯度与方向导数的最大值](#section-4-10)
   - [向量场的散度与旋度](#section-4-11)
 - [第五部分：重积分](#section-5)
   - [被积函数为 1：二重积分等于区域面积](#section-5-1)
@@ -123,10 +121,12 @@
   - [常用麦克劳林展开](#section-7-22)
   - [两条常用幂级数求和公式](#section-7-23)
   - [傅里叶级数](#fourier-series)
-- [第八部分：空间解析几何](#section-8)
+- [第八部分：向量与空间解析几何](#section-8)
   - [平面二次曲线的判别式](#section-8-1)
   - [向量的坐标、模与方向余弦](#section-8-2)
   - [数量积、向量积与混合积](#section-8-3)
+  - [方向导数：先将方向向量单位化](#section-8-13)
+  - [梯度与方向导数的最大值](#section-8-14)
   - [空间平面方程与平面束](#section-8-4)
   - [空间直线方程](#section-8-5)
   - [点到直线、平面的距离](#section-8-6)
@@ -2763,79 +2763,6 @@ $$
 
 若 $\Delta=0$，极小、极大、非极值均可能出现，例如原点处的 $x^4+y^4$、$-x^4-y^4$、$x^4-y^4$。沿不同路径出现大于和小于该点函数值的情况，可排除极值；只验证有限条路径不能证明极值。
 
-### 方向导数：先将方向向量单位化（仅数学一） <span id="section-4-9"></span>
-
-设 $P_0=(x_0,y_0,z_0)$，方向 $l$ 的单位向量为
-
-$$
-\boldsymbol e=(\cos\alpha,\cos\beta,\cos\gamma),\qquad |\boldsymbol e|=1.
-$$
-
-沿从 $P_0$ 出发的射线，方向导数定义为
-
-$$
-\boxed{D_{\boldsymbol e}u(P_0)
-=\lim_{t\to0^+}\frac{u(P_0+t\boldsymbol e)-u(P_0)}{t}}.
-$$
-
-分母 $t$ 表示沿该方向走过的距离。若 $u$ 在 $P_0$ **可微**，则
-
-$$
-\boxed{D_{\boldsymbol e}u(P_0)
-=u_x(P_0)\cos\alpha+u_y(P_0)\cos\beta+u_z(P_0)\cos\gamma}.
-$$
-
-由全增量公式 $u(P_0+t\boldsymbol e)-u(P_0)=t(u_x\cos\alpha+u_y\cos\beta+u_z\cos\gamma)+o(t)$，除以 $t$ 取极限即得。
-
-若题目给出非零向量 $\boldsymbol v=(a,b,c)$，须先取
-
-$$
-\boldsymbol e=\frac{\boldsymbol v}{|\boldsymbol v|}
-=\frac{(a,b,c)}{\sqrt{a^2+b^2+c^2}}.
-$$
-
-给出从 $A$ 指向 $B$ 的方向时，用 $\overrightarrow{AB}=B-A$，再单位化。二元函数同理：$D_{\boldsymbol e}u=u_x\cos\alpha+u_y\sin\alpha$，其中 $\alpha$ 为有向方向与 $x$ 轴正向的角。
-
-**条件：** 仅有偏导数存在，不能保证上述计算公式成立；不可微时应回到定义。对可微函数，反向后的方向导数变号。
-
-### 梯度与方向导数的最大值（仅数学一） <span id="section-4-10"></span>
-
-对可微标量函数 $u$，梯度为向量
-
-$$
-\boxed{\operatorname{grad}u=\nabla u=(u_x,u_y,u_z)}.
-$$
-
-因此，对任意单位方向 $\boldsymbol e$，
-
-$$
-\boxed{D_{\boldsymbol e}u=\nabla u\cdot\boldsymbol e
-=|\nabla u|\cos\theta},
-$$
-
-其中 $\theta$ 为非零梯度与该方向的夹角。在固定点处：
-
-| 方向（梯度非零时）           | 方向导数 | 含义                     |
-| ---------------------------- | -------- | ------------------------ | --- | -------- | --- | -------------------- |
-| $\boldsymbol e=\nabla u/     | \nabla u | $                        | $   | \nabla u | $   | 增长最快，取得最大值 |
-| $\boldsymbol e=-\nabla u/    | \nabla u | $                        | $-  | \nabla u | $   | 减小最快，取得最小值 |
-| $\boldsymbol e\perp\nabla u$ | $0$      | 沿该方向的一阶变化率为零 |
-
-若 $\nabla u(P_0)=\boldsymbol0$，所有方向导数都为 $0$，此时不能指定唯一的最快增长方向，也不能仅据此判断极值。
-
-**几何意义：** 在正则等值面 $u(x,y,z)=C$ 上，$\nabla u\ne\boldsymbol0$ 时，梯度垂直于该点的切平面；二元函数的梯度垂直于正则等值曲线。
-
-常用运算（函数可微，商式另须 $v\ne0$）：
-
-$$
-\begin{aligned}
-\nabla(u\pm v)&=\nabla u\pm\nabla v,\\
-\nabla(uv)&=v\nabla u+u\nabla v,\\
-\nabla\left(\frac uv\right)&=\frac{v\nabla u-u\nabla v}{v^2},\\
-\nabla\varphi(u)&=\varphi'(u)\nabla u.
-\end{aligned}
-$$
-
 ### 向量场的散度与旋度（仅数学一） <span id="section-4-11"></span>
 
 设向量场 $\boldsymbol A=P\boldsymbol i+Q\boldsymbol j+R\boldsymbol k$ 具有连续一阶偏导数。
@@ -4968,7 +4895,7 @@ $$
 
 **选法：** 题目要求正弦级数，就作周期奇延拓；要求余弦级数，就作周期偶延拓。两种展开都只用 $[0,l]$ 上的积分，周期均为 $2l$；端点处的级数和须按各自的延拓方式判断。
 
-## <span style="color: #3498db;">第八部分：空间解析几何</span> <span id="section-8"></span>
+## <span style="color: #3498db;">第八部分：向量与空间解析几何</span> <span id="section-8"></span>
 
 ### 平面二次曲线的判别式 <span id="section-8-1"></span>
 
@@ -5115,6 +5042,79 @@ $$
 
 三向量共面（线性相关）当且仅当混合积为零。**体积须取绝对值，混合积本身有正负。**
 
+### 方向导数：先将方向向量单位化（仅数学一） <span id="section-8-13"></span>
+
+设 $P_0=(x_0,y_0,z_0)$，方向 $l$ 的单位向量为
+
+$$
+\boldsymbol e=(\cos\alpha,\cos\beta,\cos\gamma),\qquad |\boldsymbol e|=1.
+$$
+
+沿从 $P_0$ 出发的射线，方向导数定义为
+
+$$
+\boxed{D_{\boldsymbol e}u(P_0)
+=\lim_{t\to0^+}\frac{u(P_0+t\boldsymbol e)-u(P_0)}{t}}.
+$$
+
+分母 $t$ 表示沿该方向走过的距离。若 $u$ 在 $P_0$ **可微**，则
+
+$$
+\boxed{D_{\boldsymbol e}u(P_0)
+=u_x(P_0)\cos\alpha+u_y(P_0)\cos\beta+u_z(P_0)\cos\gamma}.
+$$
+
+由全增量公式 $u(P_0+t\boldsymbol e)-u(P_0)=t(u_x\cos\alpha+u_y\cos\beta+u_z\cos\gamma)+o(t)$，除以 $t$ 取极限即得。
+
+若题目给出非零向量 $\boldsymbol v=(a,b,c)$，须先取
+
+$$
+\boldsymbol e=\frac{\boldsymbol v}{|\boldsymbol v|}
+=\frac{(a,b,c)}{\sqrt{a^2+b^2+c^2}}.
+$$
+
+给出从 $A$ 指向 $B$ 的方向时，用 $\overrightarrow{AB}=B-A$，再单位化。二元函数同理：$D_{\boldsymbol e}u=u_x\cos\alpha+u_y\sin\alpha$，其中 $\alpha$ 为有向方向与 $x$ 轴正向的角。
+
+**条件：** 仅有偏导数存在，不能保证上述计算公式成立；不可微时应回到定义。对可微函数，反向后的方向导数变号。
+
+### 梯度与方向导数的最大值（仅数学一） <span id="section-8-14"></span>
+
+对可微标量函数 $u$，梯度为向量
+
+$$
+\boxed{\operatorname{grad}u=\nabla u=(u_x,u_y,u_z)}.
+$$
+
+因此，对任意单位方向 $\boldsymbol e$，
+
+$$
+\boxed{D_{\boldsymbol e}u=\nabla u\cdot\boldsymbol e
+=|\nabla u|\cos\theta},
+$$
+
+其中 $\theta$ 为非零梯度与该方向的夹角。在固定点处：
+
+| 方向（梯度非零时）                             | 方向导数                | 含义                     |
+| ---------------------------------------------- | ----------------------- | ------------------------ |
+| $\boldsymbol e=\nabla u/\lVert\nabla u\rVert$  | $\lVert\nabla u\rVert$  | 增长最快，取得最大值     |
+| $\boldsymbol e=-\nabla u/\lVert\nabla u\rVert$ | $-\lVert\nabla u\rVert$ | 减小最快，取得最小值     |
+| $\boldsymbol e\perp\nabla u$                   | $0$                     | 沿该方向的一阶变化率为零 |
+
+若 $\nabla u(P_0)=\boldsymbol0$，所有方向导数都为 $0$，此时不能指定唯一的最快增长方向，也不能仅据此判断极值。
+
+**几何意义：** 在正则等值面 $u(x,y,z)=C$ 上，$\nabla u\ne\boldsymbol0$ 时，梯度垂直于该点的切平面；二元函数的梯度垂直于正则等值曲线。
+
+常用运算（函数可微，商式另须 $v\ne0$）：
+
+$$
+\begin{aligned}
+\nabla(u\pm v)&=\nabla u\pm\nabla v,\\
+\nabla(uv)&=v\nabla u+u\nabla v,\\
+\nabla\left(\frac uv\right)&=\frac{v\nabla u-u\nabla v}{v^2},\\
+\nabla\varphi(u)&=\varphi'(u)\nabla u.
+\end{aligned}
+$$
+
 ### 空间平面方程与平面束 <span id="section-8-4"></span>
 
 确定平面的两个要素：平面上一点 $P_0=(x_0,y_0,z_0)$、非零法向量 $\boldsymbol n=(A,B,C)$。
@@ -5210,11 +5210,11 @@ $$
 
 设两直线的方向向量为 $\boldsymbol\tau_1,\boldsymbol\tau_2$，两平面的法向量为 $\boldsymbol n_1,\boldsymbol n_2$，均非零。
 
-| 对象       | 方向条件                                                                                                                   | 夹角公式（$0\le\theta\le\pi/2$） |
-| ---------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------- | --------------------------------------- | --- | ----------------- | --- | ----------------- | --- |
-| 两直线     | 同向或反向：$\boldsymbol\tau_1\times\boldsymbol\tau_2=\boldsymbol0$；方向正交：$\boldsymbol\tau_1\cdot\boldsymbol\tau_2=0$ | $\cos\theta=\dfrac{              | \boldsymbol\tau_1\cdot\boldsymbol\tau_2 | }{  | \boldsymbol\tau_1 |     | \boldsymbol\tau_2 | }$  |
-| 两平面     | 法向量平行：$\boldsymbol n_1\times\boldsymbol n_2=\boldsymbol0$；垂直：$\boldsymbol n_1\cdot\boldsymbol n_2=0$             | $\cos\theta=\dfrac{              | \boldsymbol n_1\cdot\boldsymbol n_2     | }{  | \boldsymbol n_1   |     | \boldsymbol n_2   | }$  |
-| 直线与平面 | 垂直：$\boldsymbol\tau\times\boldsymbol n=\boldsymbol0$；方向平行于平面：$\boldsymbol\tau\cdot\boldsymbol n=0$             | $\sin\theta=\dfrac{              | \boldsymbol\tau\cdot\boldsymbol n       | }{  | \boldsymbol\tau   |     | \boldsymbol n     | }$  |
+| 对象       | 方向条件                                                                                                                   | 夹角公式（$0\le\theta\le\pi/2$）                                                                                                     |
+| ---------- | -------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| 两直线     | 同向或反向：$\boldsymbol\tau_1\times\boldsymbol\tau_2=\boldsymbol0$；方向正交：$\boldsymbol\tau_1\cdot\boldsymbol\tau_2=0$ | $\cos\theta=\dfrac{\lvert\boldsymbol\tau_1\cdot\boldsymbol\tau_2\rvert}{\lVert\boldsymbol\tau_1\rVert\lVert\boldsymbol\tau_2\rVert}$ |
+| 两平面     | 法向量平行：$\boldsymbol n_1\times\boldsymbol n_2=\boldsymbol0$；垂直：$\boldsymbol n_1\cdot\boldsymbol n_2=0$             | $\cos\theta=\dfrac{\lvert\boldsymbol n_1\cdot\boldsymbol n_2\rvert}{\lVert\boldsymbol n_1\rVert\lVert\boldsymbol n_2\rVert}$         |
+| 直线与平面 | 垂直：$\boldsymbol\tau\times\boldsymbol n=\boldsymbol0$；方向平行于平面：$\boldsymbol\tau\cdot\boldsymbol n=0$             | $\sin\theta=\dfrac{\lvert\boldsymbol\tau\cdot\boldsymbol n\rvert}{\lVert\boldsymbol\tau\rVert\lVert\boldsymbol n\rVert}$             |
 
 **记忆：线线、面面用余弦，线面用正弦；取绝对值得到不超过 $\pi/2$ 的夹角。**
 
@@ -5251,25 +5251,111 @@ $$
 
 以下 $a,b,c,p,q>0$，默认中心或顶点在原点；其他位置可先平移坐标。判断形状时，固定一个坐标，看截线。
 
-| 曲面                 | 标准方程                    | 识别与截面                                            |
-| -------------------- | --------------------------- | ----------------------------------------------------- | --- | ------ |
-| 椭球面               | $x^2/a^2+y^2/b^2+z^2/c^2=1$ | 三个平方项均为正；$a=b=c$ 时为球面                    |
-| 单叶双曲面           | $x^2/a^2+y^2/b^2-z^2/c^2=1$ | 两正一负；负号对应 $z$ 轴，$z=k$ 截面均为椭圆         |
-| 双叶双曲面           | $x^2/a^2-y^2/b^2-z^2/c^2=1$ | 一正两负；沿正号对应的 $x$ 轴分成两叶，$              | x   | \ge a$ |
-| 椭圆抛物面           | $z=x^2/(2p)+y^2/(2q)$       | 向 $z$ 正向开口；$z=k>0$ 截面为椭圆，竖直截面为抛物线 |
-| 椭圆锥面             | $x^2/a^2+y^2/b^2=z^2/c^2$   | 沿 $z$ 轴的双锥，$z=0$ 时仅一个顶点                   |
-| 双曲抛物面（马鞍面） | $z=-x^2/(2p)+y^2/(2q)$      | 水平非零截面为双曲线，$x=k$、$y=k$ 截面为抛物线       |
-| 双曲抛物面的另一形式 | $z=xy$                      | $z=k\ne0$ 为双曲线；$z=0$ 为两相交直线                |
+以下图形采用白底黑线，虚线表示被遮挡的轮廓、截线或坐标轴部分。曲面与柱面均只画出有限范围，不代表它们在图示边缘处终止。
+
+#### 1. 椭球面
+
+$$
+\frac{x^2}{a^2}+\frac{y^2}{b^2}+\frac{z^2}{c^2}=1.
+$$
+
+<img src="assets/quadric-line-art/ellipsoid.png" alt="椭球面：坐标轴与椭圆截线，遮挡部分用虚线表示" width="460">
+
+三个平方项均为正；$a=b=c$ 时为球面。用平行于坐标面的平面截取，非退化截线为椭圆或圆；相切时为一个点，超出曲面范围时无交点。
+
+#### 2. 单叶双曲面
+
+$$
+\frac{x^2}{a^2}+\frac{y^2}{b^2}-\frac{z^2}{c^2}=1.
+$$
+
+<img src="assets/quadric-line-art/hyperboloid-one-sheet.png" alt="单叶双曲面：沿 z 轴连成一体，中间有非零椭圆腰部" width="460">
+
+两正一负，负号对应中心轴 $z$。$z=k$ 的截线均为椭圆，$z=0$ 处的椭圆最小；$x=0$、$y=0$ 的截线为双曲线。
+
+#### 3. 双叶双曲面
+
+$$
+\frac{x^2}{a^2}-\frac{y^2}{b^2}-\frac{z^2}{c^2}=1.
+$$
+
+<img src="assets/quadric-line-art/hyperboloid-two-sheets.png" alt="双叶双曲面：沿 x 轴分成左右两叶，原点附近没有曲面" width="460">
+
+一正两负，沿正号对应的 $x$ 轴分成两叶，$\lvert x\rvert\ge a$。$x=k$ 在 $\lvert k\rvert>a$ 时截得椭圆，$\lvert k\rvert=a$ 时截得一个顶点，$\lvert k\rvert<a$ 时无交点。
+
+#### 4. 椭圆抛物面
+
+$$
+z=\frac{x^2}{2p}+\frac{y^2}{2q}.
+$$
+
+<img src="assets/quadric-line-art/elliptic-paraboloid.png" alt="椭圆抛物面：顶点在原点，沿 z 轴正向开口" width="460">
+
+向 $z$ 正向开口，顶点为原点。$z=k>0$ 截得椭圆；$x=k$、$y=k$ 截得抛物线。$p=q$ 时为旋转抛物面。
+
+#### 5. 椭圆锥面
+
+$$
+\frac{x^2}{a^2}+\frac{y^2}{b^2}=\frac{z^2}{c^2}.
+$$
+
+<img src="assets/quadric-line-art/elliptic-cone.png" alt="椭圆锥面：上下两半锥在原点相接，遮挡部分用虚线表示" width="460">
+
+沿 $z$ 轴的双锥，上下两半在原点相接。$z=k\ne0$ 截得椭圆，$z=0$ 时只有顶点；过 $z$ 轴的平面截得两条相交直线。
+
+#### 6. 双曲抛物面（马鞍面）
+
+$$
+z=-\frac{x^2}{2p}+\frac{y^2}{2q}.
+$$
+
+<img src="assets/quadric-line-art/hyperbolic-paraboloid.png" alt="双曲抛物面：沿 y 方向上弯，沿 x 方向下弯" width="460">
+
+两个平方项符号相反。$x=0$ 截得向上的抛物线，$y=0$ 截得向下的抛物线；$z=k\ne0$ 截得双曲线，$z=0$ 截得两条相交直线。
+
+#### 7. 双曲抛物面的另一形式
+
+$$
+z=xy.
+$$
+
+<img src="assets/quadric-line-art/saddle-xy.png" alt="马鞍面 z=xy：x 轴与 y 轴均在曲面上" width="460">
+
+$xy>0$ 时曲面在 $xOy$ 平面上方，$xy<0$ 时在下方。$z=k\ne0$ 截得双曲线；$z=0$ 截得 $x$ 轴和 $y$ 轴。$x=k$ 或 $y=k$ 的截线均为直线。
 
 例如 $z=y^2-x^2=(y+x)(y-x)$，令 $u=y+x,\ v=y-x$ 可写成 $z=uv$；若要将该变换解释为纯旋转，须对新坐标作归一化。
 
 **柱面：** 直线沿定曲线平行移动形成的曲面。方程中缺少某个坐标时，该坐标可自由变化，母线平行于该坐标轴。
 
-| 方程                | 曲面名称                   | 母线方向      |
-| ------------------- | -------------------------- | ------------- |
-| $x^2/a^2+y^2/b^2=1$ | 椭圆柱面；$a=b$ 时为圆柱面 | 平行于 $z$ 轴 |
-| $x^2/a^2-y^2/b^2=1$ | 双曲柱面                   | 平行于 $z$ 轴 |
-| $y=ax^2$，$a>0$     | 抛物柱面                   | 平行于 $z$ 轴 |
+#### 8. 椭圆柱面
+
+$$
+\frac{x^2}{a^2}+\frac{y^2}{b^2}=1.
+$$
+
+<img src="assets/quadric-line-art/elliptic-cylinder.png" alt="椭圆柱面：椭圆沿 z 轴方向平移，后侧截线用虚线表示" width="460">
+
+方程缺少 $z$，母线平行于 $z$ 轴。$z=k$ 的截线都是同样大小的椭圆；$a=b$ 时为圆柱面。
+
+#### 9. 双曲柱面
+
+$$
+\frac{x^2}{a^2}-\frac{y^2}{b^2}=1.
+$$
+
+<img src="assets/quadric-line-art/hyperbolic-cylinder.png" alt="双曲柱面：双曲线沿 z 轴方向平移形成两片分离的曲面" width="460">
+
+方程缺少 $z$，母线平行于 $z$ 轴。$z=k$ 的截线都是同一双曲线，整个柱面分成两片。
+
+#### 10. 抛物柱面
+
+$$
+y=ax^2,\qquad a>0.
+$$
+
+<img src="assets/quadric-line-art/parabolic-cylinder.png" alt="抛物柱面：开口朝 y 轴正向的抛物线沿 z 轴方向平移" width="460">
+
+方程缺少 $z$，母线平行于 $z$ 轴。$z=k$ 的截线都是向 $y$ 正向开口的同一抛物线；曲面沿 $z$ 方向延伸。
 
 **易错：** $z^2=x^2+y^2$ 表示整个双锥；$z=\sqrt{x^2+y^2}$ 只表示上半锥。单叶、双叶双曲面须先把右侧化为 $1$ 再按符号判断。
 
@@ -5370,10 +5456,6 @@ $$
 法线为 $(x,y,z)=(x_0,y_0,z_0)+s(f_x,f_y,-1)$，其中偏导数均在 $(x_0,y_0)$ 处取值。
 
 若要法向量朝上，可取 $(-f_x,-f_y,1)$；朝下则取 $(f_x,f_y,-1)$。法向量反向不改变切平面和法线，但会改变定向。
-
-**选法：** 曲线求切线先找切向量，曲面求切平面先找法向量；求法平面用曲线切向量，求法线用曲面法向量。
-
-本次补充依据：`Pictures/1` 中编号 1004—1021 的 18 张照片。仅整理照片中可辨认的正文与批注；截断的例 17.2、例 17.6 未补写题干。
 
 ## <span style="color: #3498db;">第九部分：曲线积分、曲面积分</span> <span id="section-9"></span>
 

@@ -784,6 +784,26 @@ $$
 
 ## <span style="color: #3498db;">第三章：一元函数积分学及其应用</span> <span id="chapter-3"></span>
 
+### 分子分母同乘共轭式求不定积分 <span id="section-61"></span>
+
+**题目：** 求 $\displaystyle\int\frac{1}{1+\sin x}\,\mathrm dx$。
+
+**解：** 分子分母同时乘以 $1-\sin x$，利用 $1-\sin^2x=\cos^2x$：
+
+$$
+\begin{aligned}
+\int\frac{1}{1+\sin x}\,\mathrm dx
+&=\int\frac{1-\sin x}{(1+\sin x)(1-\sin x)}\,\mathrm dx\\
+&=\int\frac{1-\sin x}{\cos^2x}\,\mathrm dx\\
+&=\int\sec^2x\,\mathrm dx-\int\sec x\tan x\,\mathrm dx\\
+&=\boxed{\tan x-\sec x+C}.
+\end{aligned}
+$$
+
+**要点：** 分母出现 $1+\sin x$ 时，同乘 $1-\sin x$，化为平方差后拆成基本积分。
+
+上述变形在 $\cos x\ne0$ 时成立。结果也可写成 $\displaystyle-\frac{\cos x}{1+\sin x}+C$，这一形式在原被积函数的整个定义域内均有意义。
+
 ### 含变上限积分的函数：第一类间断点个数（题 12） <span id="section-15"></span>
 
 **题目：** 函数

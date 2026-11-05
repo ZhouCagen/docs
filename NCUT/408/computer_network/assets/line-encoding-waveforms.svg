@@ -75,5 +75,5 @@
 <text x="985" y="666" class="rule" text-anchor="start">位开始：0 翻转，1 保持</text>
 <text x="985" y="695" class="rule" text-anchor="start">每位中间必跳变；初始为 L</text>
 <text x="270" y="753" class="muted" text-anchor="start">读图：NRZ 看电平；NRZI 看位开始；曼彻斯特看位中间方向；差分曼彻斯特看位开始。</text>
-<text x="270" y="779" class="muted" text-anchor="start">本图沿用截图约定；具体题目若采用不同映射，以题目为准。H / L 表示高 / 低电平，0 表示零电平。</text>
+<text x="270" y="779" class="muted" text-anchor="start">编码映射见各行说明；具体题目若采用不同映射，以题目为准。H / L 表示高 / 低电平，0 表示零电平。</text>
 </svg>
