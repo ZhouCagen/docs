@@ -59,7 +59,6 @@
   - [定积分的几何应用：平面图形的面积](#section-3-21)
   - [旋转体体积：柱壳法](#section-3-22)
   - [绕任意定直线旋转的体积](#section-3-23)
-  - [平面曲边梯形的形心坐标](#section-3-24)
   - [平面曲线的弧长](#section-3-25)
   - [旋转曲面的面积](#section-3-26)
 - [第四部分：多元函数微分学](#section-4)
@@ -137,7 +136,21 @@
   - [空间曲线的切线与法平面](#section-8-11)
   - [空间曲面的切平面与法线](#section-8-12)
 - [第九部分：曲线积分、曲面积分](#section-9)
+  - [第一型曲线积分：弧长微元与计算公式](#section-9-1)
+  - [第一型曲面积分：面积微元与三种投影公式](#section-9-2)
+  - [第二型曲线积分：对坐标的曲线积分与参数代入法](#section-9-3)
+  - [格林公式及使用条件](#section-9-4)
+  - [第二型曲面积分：三种投影公式与方向](#section-9-5)
+  - [高斯公式：使用条件与补面法（仅数学一）](#section-9-6)
+  - [斯托克斯公式（仅数学一）](#section-9-7)
 - [第十部分：特殊公式](#section-10)
+  - [重心、质心与形心：各类公式汇总](#section-10-8)
+    - [离散质点与组合物体](#section-10-8-1)
+    - [曲线（平面细线、空间细线）](#section-10-8-2)
+    - [平面区域（薄片）](#section-10-8-3)
+    - [曲面（空间薄壳）](#section-10-8-4)
+    - [空间立体](#section-10-8-5)
+    - [平面曲边梯形的形心：一元积分公式与推导](#section-10-8-6)
   - [三角恒等式](#section-10-1)
   - [根式与绝对值](#section-10-2)
   - [平方和公式](#section-10-3)
@@ -2303,52 +2316,6 @@ $$
 - 绕 $x$ 轴：取 $A=0,B=1,C=0$，得到 $V=\pi\int_a^b f^2(x)\,\mathrm dx$。
 - 绕水平直线 $y=k$：取 $A=0,B=1,C=-k$，得到 $V=\pi\int_a^b[f(x)-k]^2\,\mathrm dx$。
 - 若某条垂直于旋转轴的直线与曲线有两个或更多交点，不能直接套用此式；应先分析截面，用圆环法等方法处理，避免重复计算。
-
-### 平面曲边梯形的形心坐标 <span id="section-3-24"></span>
-
-设 $f(x)$ 在 $[a,b]$ 上连续且非负，平面区域为
-
-$$
-D=\{(x,y)\mid a\le x\le b,\ 0\le y\le f(x)\},
-$$
-
-其面积 $S=\int_a^b f(x)\,\mathrm dx>0$。形心是区域的几何中心；若薄片面密度均匀，形心与质心重合。
-
-#### 公式与二重积分化简过程 <span id="section-3-24-1"></span>
-
-以 $\mathrm d\sigma$ 表示面积微元，形心横坐标为
-
-$$
-\begin{aligned}
-\bar x
-&=\frac{\iint_D x\,\mathrm d\sigma}{\iint_D\mathrm d\sigma}\\
-&=\frac{\displaystyle\int_a^b\left[\int_0^{f(x)}x\,\mathrm dy\right]\mathrm dx}
-{\displaystyle\int_a^b\left[\int_0^{f(x)}1\,\mathrm dy\right]\mathrm dx}\\
-&=\frac{\displaystyle\int_a^b[xy]_0^{f(x)}\,\mathrm dx}
-{\displaystyle\int_a^b[y]_0^{f(x)}\,\mathrm dx}\\
-&=\boxed{\frac{\displaystyle\int_a^b xf(x)\,\mathrm dx}
-{\displaystyle\int_a^b f(x)\,\mathrm dx}}.
-\end{aligned}
-$$
-
-形心纵坐标为
-
-$$
-\begin{aligned}
-\bar y
-&=\frac{\iint_D y\,\mathrm d\sigma}{\iint_D\mathrm d\sigma}\\
-&=\frac{\displaystyle\int_a^b\left[\int_0^{f(x)}y\,\mathrm dy\right]\mathrm dx}
-{\displaystyle\int_a^b\left[\int_0^{f(x)}1\,\mathrm dy\right]\mathrm dx}\\
-&=\frac{\displaystyle\int_a^b\left[\frac{y^2}{2}\right]_0^{f(x)}\,\mathrm dx}
-{\displaystyle\int_a^b f(x)\,\mathrm dx}\\
-&=\boxed{\frac{\displaystyle\frac12\int_a^b f^2(x)\,\mathrm dx}
-{\displaystyle\int_a^b f(x)\,\mathrm dx}}.
-\end{aligned}
-$$
-
-**计算顺序：先对 $y$ 积分，此时把 $x$ 看作常数；再对 $x$ 积分。** 分母都是区域面积，$\bar y$ 分子中的 $\frac12$ 来自 $\int y\,\mathrm dy=\frac12y^2$。
-
-也可取竖直小条理解：小条面积为 $\mathrm dS=f(x)\,\mathrm dx$，其形心坐标为 $(x,f(x)/2)$，再按面积加权平均，即得到上述两式。
 
 ### 平面曲线的弧长 <span id="section-3-25"></span>
 
@@ -5459,7 +5426,596 @@ $$
 
 ## <span style="color: #3498db;">第九部分：曲线积分、曲面积分</span> <span id="section-9"></span>
 
+### 第一型曲线积分：弧长微元与计算公式 <span id="section-9-1"></span>
+
+第一型曲线积分是**对弧长的积分**，记作 $\int_L f\,\mathrm ds$。计算时，将曲线方程代入被积函数，并把弧长微元 $\mathrm ds$ 化为相应变量的微元。
+
+#### 平面曲线：直角坐标式 <span id="section-9-1-1"></span>
+
+平面曲线的弧长微元为
+
+$$
+\boxed{\mathrm ds=\sqrt{(\mathrm dx)^2+(\mathrm dy)^2}}.
+$$
+
+若 $L:\ y=y(x),\ a\le x\le b$，则
+
+$$
+\boxed{\mathrm ds=\sqrt{1+[y'(x)]^2}\,|\mathrm dx|}.
+$$
+
+按 $x$ 递增积分时，取 $\mathrm ds=\sqrt{1+[y'(x)]^2}\,\mathrm dx$，于是
+
+$$
+\boxed{\int_L f(x,y)\,\mathrm ds
+=\int_a^b f(x,y(x))\sqrt{1+[y'(x)]^2}\,\mathrm dx}.
+$$
+
+#### 平面曲线：参数式 <span id="section-9-1-2"></span>
+
+若曲线由参数方程
+
+$$
+\begin{cases}
+x=x(t),\\
+y=y(t),
+\end{cases}
+\qquad \alpha\le t\le\beta
+$$
+
+给出，则
+
+$$
+\boxed{\mathrm ds=\sqrt{[x'(t)]^2+[y'(t)]^2}\,|\mathrm dt|},
+$$
+
+$$
+\boxed{\int_L f(x,y)\,\mathrm ds
+=\int_\alpha^\beta f(x(t),y(t))
+\sqrt{[x'(t)]^2+[y'(t)]^2}\,\mathrm dt}.
+$$
+
+#### 平面曲线：极坐标式 <span id="section-9-1-3"></span>
+
+若 $L:\ r=r(\theta),\ \alpha\le\theta\le\beta$，即
+
+$$
+x=r(\theta)\cos\theta,\qquad y=r(\theta)\sin\theta,
+$$
+
+则
+
+$$
+\boxed{\mathrm ds=\sqrt{r(\theta)^2+[r'(\theta)]^2}\,|\mathrm d\theta|},
+$$
+
+$$
+\boxed{\int_L f(x,y)\,\mathrm ds
+=\int_\alpha^\beta
+f\bigl(r(\theta)\cos\theta,r(\theta)\sin\theta\bigr)
+\sqrt{r(\theta)^2+[r'(\theta)]^2}\,\mathrm d\theta}.
+$$
+
+#### 空间曲线：参数式 <span id="section-9-1-4"></span>
+
+若空间曲线由参数方程
+
+$$
+\begin{cases}
+x=x(t),\\
+y=y(t),\\
+z=z(t),
+\end{cases}
+\qquad \alpha\le t\le\beta
+$$
+
+给出，则
+
+$$
+\boxed{\mathrm ds=\sqrt{(\mathrm dx)^2+(\mathrm dy)^2+(\mathrm dz)^2}
+=\sqrt{[x'(t)]^2+[y'(t)]^2+[z'(t)]^2}\,|\mathrm dt|},
+$$
+
+$$
+\boxed{\int_L f(x,y,z)\,\mathrm ds
+=\int_\alpha^\beta f(x(t),y(t),z(t))
+\sqrt{[x'(t)]^2+[y'(t)]^2+[z'(t)]^2}\,\mathrm dt}.
+$$
+
+**使用提醒：** 上述公式用于光滑或分段光滑曲线，参数区间应使曲线恰好描绘一次；分段表示时分别积分后相加。第一型曲线积分与曲线方向无关，积分下限取变量的较小值、上限取较大值；$\mathrm ds$ 是非负的弧长微元，不能因反向而变号。
+
+### 第一型曲面积分：面积微元与三种投影公式 <span id="section-9-2"></span>
+
+第一型曲面积分是**对曲面面积的积分**，记作 $\iint_\Sigma f(x,y,z)\,\mathrm dS$。选一个便于描述曲面的坐标面投影，将曲面积分化为投影区域上的二重积分。
+
+#### 投影到 $xy$ 平面：$\mathrm dx\,\mathrm dy$ <span id="section-9-2-1"></span>
+
+若 $\Sigma:\ z=z(x,y)$，在 $xy$ 平面上的投影区域为 $D_{xy}$，则
+
+$$
+\boxed{\mathrm dS=\sqrt{1+z_x^2+z_y^2}\,\mathrm dx\,\mathrm dy},
+$$
+
+$$
+\boxed{\iint_\Sigma f(x,y,z)\,\mathrm dS
+=\iint_{D_{xy}} f\bigl(x,y,z(x,y)\bigr)
+\sqrt{1+z_x^2+z_y^2}\,\mathrm dx\,\mathrm dy}.
+$$
+
+其中 $z_x=\dfrac{\partial z}{\partial x},\ z_y=\dfrac{\partial z}{\partial y}$。
+
+#### 投影到 $yz$ 平面：$\mathrm dy\,\mathrm dz$ <span id="section-9-2-2"></span>
+
+若 $\Sigma:\ x=x(y,z)$，在 $yz$ 平面上的投影区域为 $D_{yz}$，则
+
+$$
+\boxed{\mathrm dS=\sqrt{1+x_y^2+x_z^2}\,\mathrm dy\,\mathrm dz},
+$$
+
+$$
+\boxed{\iint_\Sigma f(x,y,z)\,\mathrm dS
+=\iint_{D_{yz}} f\bigl(x(y,z),y,z\bigr)
+\sqrt{1+x_y^2+x_z^2}\,\mathrm dy\,\mathrm dz}.
+$$
+
+其中 $x_y=\dfrac{\partial x}{\partial y},\ x_z=\dfrac{\partial x}{\partial z}$。
+
+#### 投影到 $xz$ 平面：$\mathrm dx\,\mathrm dz$ <span id="section-9-2-3"></span>
+
+若 $\Sigma:\ y=y(x,z)$，在 $xz$ 平面上的投影区域为 $D_{xz}$，则
+
+$$
+\boxed{\mathrm dS=\sqrt{1+y_x^2+y_z^2}\,\mathrm dx\,\mathrm dz},
+$$
+
+$$
+\boxed{\iint_\Sigma f(x,y,z)\,\mathrm dS
+=\iint_{D_{xz}} f\bigl(x,y(x,z),z\bigr)
+\sqrt{1+y_x^2+y_z^2}\,\mathrm dx\,\mathrm dz}.
+$$
+
+其中 $y_x=\dfrac{\partial y}{\partial x},\ y_z=\dfrac{\partial y}{\partial z}$。
+
+**记忆：** 投影后留下哪两个变量，就把第三个坐标写成这两个变量的函数；面积因子是“$1+$ 该函数的两个偏导数的平方，再开根号”。被积函数中的第三个坐标也必须代入。
+
+**使用提醒：** 上述公式要求曲面可在相应投影区域上表示为具有连续一阶偏导数的单值函数；多片曲面或同一投影点对应多个曲面点时，应分片计算再相加。第一型曲面积分与曲面定向无关；取 $f\equiv1$ 即得曲面面积 $S=\iint_\Sigma\mathrm dS$。
+
+### 第二型曲线积分：对坐标的曲线积分与参数代入法 <span id="section-9-3"></span>
+
+第二型曲线积分又称**第二类曲线积分（对坐标的曲线积分）**，平面情形记作
+
+$$
+\boxed{I=\int_L P(x,y)\,\mathrm dx+Q(x,y)\,\mathrm dy}.
+$$
+
+#### 参数代入公式 <span id="section-9-3-1"></span>
+
+设有向曲线 $L$ 的参数方程为
+
+$$
+x=x(t),\qquad y=y(t),
+$$
+
+沿指定方向，参数从起点对应的 $t=a$ 变到终点对应的 $t=b$。代入
+
+$$
+\mathrm dx=x'(t)\,\mathrm dt,\qquad
+\mathrm dy=y'(t)\,\mathrm dt,
+$$
+
+得到
+
+$$
+\boxed{I=\int_a^b\Bigl[
+P\bigl(x(t),y(t)\bigr)x'(t)
++Q\bigl(x(t),y(t)\bigr)y'(t)
+\Bigr]\,\mathrm dt}.
+$$
+
+**做题顺序：** 先按曲线方向确定参数上下限，再将 $x(t),y(t)$ 代入 $P,Q$，分别乘上 $x'(t),y'(t)$，最后计算一元定积分。曲线分段给出时，各段按指定方向计算后相加。
+
+**方向提醒：** 下限对应起点，上限对应终点，不能直接按大小重排；若参数从大到小变化，就保留从大到小的积分限。$\mathrm dx,\mathrm dy$ 保留导数的符号，不取绝对值，也不乘弧长因子 $\sqrt{[x'(t)]^2+[y'(t)]^2}$。同一曲线反向后，第二型曲线积分变号。
+
+### 格林公式及使用条件 <span id="section-9-4"></span>
+
+设 $L=\partial D$ 是平面区域 $D$ 的正向边界，则
+
+$$
+\boxed{\oint_L P(x,y)\,\mathrm dx+Q(x,y)\,\mathrm dy
+=\iint_D\left(\frac{\partial Q}{\partial x}
+-\frac{\partial P}{\partial y}\right)\,\mathrm dx\,\mathrm dy}.
+$$
+
+**使用条件：**
+
+1. 曲线 $L$ 是闭合的，为区域 $D$ 的分段光滑边界；单条边界曲线应为简单闭曲线。
+2. $P,Q$ 在区域内及边界上具有连续的一阶偏导数（通常要求在包含 $D$ 及其边界的开集上连续可微）。
+3. 边界取**正方向**：沿边界前进时，区域 $D$ 始终在左侧。
+
+**方向判断：** 单条简单闭曲线的正方向为逆时针；若区域有孔洞，整个正向边界应为**外边界逆时针、内边界顺时针**。
+
+若 $L$ 取负方向，则整体加负号：
+
+$$
+\boxed{\oint_{-L}P\,\mathrm dx+Q\,\mathrm dy
+=-\iint_D\left(\frac{\partial Q}{\partial x}
+-\frac{\partial P}{\partial y}\right)\,\mathrm dx\,\mathrm dy}.
+$$
+
+**计算记忆：** 先算 $Q_x-P_y$，再在所围区域上作二重积分，最后核对边界方向。
+
+#### 奇点（Singular Point） <span id="section-9-4-1"></span>
+
+**简单理解：** 奇点就是函数在某个点出现异常，导致函数不满足所要求条件的点。
+
+在格林公式中，重点检查 $P,Q$ 是否在区域内及边界上有未定义、不连续，或不具有连续一阶偏导数的点。若存在这样的奇点，就不能直接在整个区域上套用格林公式。
+
+例如
+
+$$
+P(x,y)=-\frac{y}{x^2+y^2},\qquad
+Q(x,y)=\frac{x}{x^2+y^2},
+$$
+
+在原点 $(0,0)$ 处分母为零，函数未定义，因此原点是奇点。若原点位于所围区域内，不能仅凭其余各点满足 $Q_x-P_y=0$ 就断定闭路积分为零。
+
+**处理思路：** 若奇点在区域内部，可挖去包围奇点的小区域，再对剩余区域使用格林公式；此时必须计入新增加的内边界积分，正方向为顺时针。
+
+### 第二型曲面积分：三种投影公式与方向 <span id="section-9-5"></span>
+
+第二型曲面积分又称**第二类曲面积分（对坐标的曲面积分）**，记作
+
+$$
+\boxed{I=\iint_\Sigma P(x,y,z)\,\mathrm dy\,\mathrm dz
++Q(x,y,z)\,\mathrm dz\,\mathrm dx
++R(x,y,z)\,\mathrm dx\,\mathrm dy}.
+$$
+
+设曲面所取方向的单位法向量为 $\boldsymbol n=(n_x,n_y,n_z)$，则
+
+$$
+I=\iint_\Sigma(Pn_x+Qn_y+Rn_z)\,\mathrm dS.
+$$
+
+#### 三种投影公式 <span id="section-9-5-1"></span>
+
+下表的 $D_{xy},D_{yz},D_{zx}$ 分别为曲面在相应坐标面上的投影区域。**“取正向”指法向量在所选投影面的垂直坐标轴上分量为正。**
+
+| 投影面 | 曲面方程   | 正向法向量可取                            | 取正向时的积分                                                        |
+| ------ | ---------- | ----------------------------------------- | --------------------------------------------------------------------- |
+| $xOy$  | $z=z(x,y)$ | $(-z_x,-z_y,1)$，即朝上，$n_z>0$          | $\displaystyle I=\iint_{D_{xy}}(R-Pz_x-Qz_y)\,\mathrm dx\,\mathrm dy$ |
+| $yOz$  | $x=x(y,z)$ | $(1,-x_y,-x_z)$，即朝 $x$ 轴正向，$n_x>0$ | $\displaystyle I=\iint_{D_{yz}}(P-Qx_y-Rx_z)\,\mathrm dy\,\mathrm dz$ |
+| $zOx$  | $y=y(z,x)$ | $(-y_x,1,-y_z)$，即朝 $y$ 轴正向，$n_y>0$ | $\displaystyle I=\iint_{D_{zx}}(Q-Py_x-Ry_z)\,\mathrm dz\,\mathrm dx$ |
+
+其中下标表示偏导数，如 $z_x=\partial z/\partial x$。表中的 $P,Q,R$ 均须代入相应曲面方程：
+
+- 投影到 $xOy$：代入 $z=z(x,y)$，例如 $P\to P(x,y,z(x,y))$。
+- 投影到 $yOz$：代入 $x=x(y,z)$，例如 $P\to P(x(y,z),y,z)$。
+- 投影到 $zOx$：代入 $y=y(z,x)$，例如 $P\to P(x,y(z,x),z)$。
+
+**方向与计算提醒：** 若曲面取与表中相反的方向，将该行积分结果整体加负号。先选投影面、将曲面写成相应函数，再求偏导并代入 $P,Q,R$，最后核对法向量方向。曲面须能在所选投影区域上表示为光滑的单值函数；多片曲面应分片按各自方向计算后相加。
+
+### 高斯公式：使用条件与补面法（仅数学一） <span id="section-9-6"></span>
+
+设闭合曲面 $\Sigma=\partial\Omega$ 取所围空间区域 $\Omega$ 的**外侧方向**，则
+
+$$
+\boxed{\iint_\Sigma P\,\mathrm dy\,\mathrm dz
++Q\,\mathrm dz\,\mathrm dx+R\,\mathrm dx\,\mathrm dy
+=\iiint_\Omega\left(
+\frac{\partial P}{\partial x}
++\frac{\partial Q}{\partial y}
++\frac{\partial R}{\partial z}
+\right)\,\mathrm dV}.
+$$
+
+简记为 $\iint_\Sigma P\,\mathrm dy\,\mathrm dz+Q\,\mathrm dz\,\mathrm dx+R\,\mathrm dx\,\mathrm dy=\iiint_\Omega(P_x+Q_y+R_z)\,\mathrm dV$，其中 $P_x+Q_y+R_z$ 是向量场 $(P,Q,R)$ 的散度。
+
+**作用：** 将闭合曲面上的第二型曲面积分化为所围立体上的三重积分。格林公式把闭合曲线积分化为二重积分，高斯公式把闭合曲面积分化为三重积分。
+
+#### 使用条件与方向 <span id="section-9-6-1"></span>
+
+1. 曲面 $\Sigma$ 必须闭合，为有界空间区域 $\Omega$ 的分片光滑边界。
+2. 曲面取**外侧方向**；若取内侧方向，三重积分前整体加负号。
+3. $P,Q,R$ 在所围区域内及边界上具有连续的一阶偏导数（通常要求在包含 $\Omega$ 及其边界的开集上连续可微）。
+
+**奇点检查：** 若区域内或边界上有使上述条件失效的奇点，不能直接对整个区域套用高斯公式。
+
+#### 曲面不闭合：补面法 <span id="section-9-6-2"></span>
+
+设原曲面为 $\Sigma$，补上曲面 $\Sigma_0$ 后围成区域 $\Omega$，使 $\Sigma\cup\Sigma_0=\partial\Omega$。当原曲面与补面均取相对于 $\Omega$ 的外侧方向时，
+
+$$
+\boxed{\begin{aligned}
+&\iint_\Sigma P\,\mathrm dy\,\mathrm dz+Q\,\mathrm dz\,\mathrm dx+R\,\mathrm dx\,\mathrm dy\\
+&\quad=\iiint_\Omega(P_x+Q_y+R_z)\,\mathrm dV
+-\iint_{\Sigma_0}\Bigl(P\,\mathrm dy\,\mathrm dz+Q\,\mathrm dz\,\mathrm dx+R\,\mathrm dx\,\mathrm dy\Bigr).
+\end{aligned}}
+$$
+
+**做题顺序：** 补面围成立体，统一取外侧方向，用高斯公式计算整个闭合曲面的积分，再减去补面的积分。若题目给定的原曲面方向与此外侧方向相反，最后将原曲面的计算结果整体变号。补面方向由立体的外侧决定，例如立体下方的水平底面取向下法向量。
+
+#### 散度为零但内部有奇点：挖洞法 <span id="section-9-6-3"></span>
+
+若除奇点外满足
+
+$$
+\boxed{P_x+Q_y+R_z=0},
+$$
+
+但所围区域内部存在奇点，**不能直接用高斯公式断定原闭合曲面积分为零，应考虑挖洞**。
+
+设原闭合曲面为 $\Sigma$，在区域内部挖去一个包围奇点的小区域 $B$，其边界为 $S$。若向量场在剩余区域 $\Omega\setminus\overline B$ 内及其边界上满足高斯公式的条件，则对剩余区域应用高斯公式。
+
+**方向：** 原外边界 $\Sigma$ 取向外；洞的内边界 $S$ 相对于剩余区域的外侧方向是**指向洞内**。记 $\boldsymbol F=(P,Q,R)$，则
+
+$$
+\iint_{\Sigma,\,\text{向外}}\boldsymbol F\cdot\boldsymbol n\,\mathrm dS
++\iint_{S,\,\text{指向洞内}}\boldsymbol F\cdot\boldsymbol n\,\mathrm dS
+=\iiint_{\Omega\setminus\overline B}(P_x+Q_y+R_z)\,\mathrm dV=0.
+$$
+
+因此，若把小曲面 $S$ 改取**从洞内指向洞外**的方向，即相对于被挖去区域 $B$ 的外侧方向，则
+
+$$
+\boxed{\iint_{\Sigma,\,\text{向外}}\boldsymbol F\cdot\boldsymbol n\,\mathrm dS
+=\iint_{S,\,\text{从洞内向外}}\boldsymbol F\cdot\boldsymbol n\,\mathrm dS}.
+$$
+
+**做题记忆：** 散度为零、有内部奇点时，挖洞后将原外表面的通量转移到包住奇点的小曲面上；若有多个孤立奇点，可分别挖洞，再将各小曲面向外的通量相加。
+
+### 斯托克斯公式（仅数学一） <span id="section-9-7"></span>
+
+设有向曲面 $\Sigma$ 的边界为闭合曲线 $L=\partial\Sigma$，曲线方向与曲面方向相容，则
+
+$$
+\boxed{\begin{aligned}
+\oint_L P\,\mathrm dx+Q\,\mathrm dy+R\,\mathrm dz
+&=\iint_\Sigma(R_y-Q_z)\,\mathrm dy\,\mathrm dz\\
+&\quad+\iint_\Sigma(P_z-R_x)\,\mathrm dz\,\mathrm dx\\
+&\quad+\iint_\Sigma(Q_x-P_y)\,\mathrm dx\,\mathrm dy.
+\end{aligned}}
+$$
+
+其中下标表示偏导数。记 $\boldsymbol F=(P,Q,R)$，也可写为
+
+$$
+\boxed{\oint_L\boldsymbol F\cdot\mathrm d\boldsymbol r
+=\iint_\Sigma(\nabla\times\boldsymbol F)\cdot\boldsymbol n\,\mathrm dS},
+\qquad
+\nabla\times\boldsymbol F=(R_y-Q_z,\ P_z-R_x,\ Q_x-P_y).
+$$
+
+**作用：** 将空间闭合曲线上的第二型曲线积分化为以该曲线为边界的曲面上的第二型曲面积分。
+
+**使用条件与方向：** 曲面须分片光滑且可定向，边界曲线分段光滑，$P,Q,R$ 在包含整个曲面及其边界的开集上具有连续的一阶偏导数。曲线方向与曲面法向量满足**右手法则**：右手四指沿边界正方向弯曲，拇指所指为曲面所取法向；反转其中一个方向，公式相应变号。
+
+**做题顺序：** 先求旋度 $(R_y-Q_z,\ P_z-R_x,\ Q_x-P_y)$，再选择以 $L$ 为边界且满足条件的简单曲面，最后按[第二型曲面积分的投影公式](#section-9-5)计算，并核对方向。若 $L$ 位于某平面内，可优先选它在该平面内围成的区域；例如曲面法向朝上时，从 $z$ 轴正向朝原点看，边界正方向为逆时针。
+
 ## <span style="color: #3498db;">第十部分：特殊公式</span> <span id="section-10"></span>
+
+### 重心、质心与形心：各类公式汇总 <span id="section-10-8"></span>
+
+**质心按质量加权，形心按几何度量加权。** 在均匀重力场中，重心与质心重合；密度均匀时，质心与形心重合。以下重心公式均按均匀重力场理解。
+
+统一记忆：
+
+$$
+\boxed{\bar x=\frac{\int x\,\mathrm dm}{M},\qquad
+\bar y=\frac{\int y\,\mathrm dm}{M},\qquad
+\bar z=\frac{\int z\,\mathrm dm}{M},\qquad M=\int\mathrm dm>0}.
+$$
+
+这里的积分按对象选为曲线积分、二重积分、曲面积分或三重积分。密度取非负值，所需积分应存在；平面对象在 $xy$ 平面内时，$\bar z=0$。
+
+| 对象                      | 几何微元                                      | 质量微元                                             | 均匀时形心的分母                      |
+| ------------------------- | --------------------------------------------- | ---------------------------------------------------- | ------------------------------------- |
+| 平面或空间曲线（细线）$L$ | 弧长 $\mathrm ds$                             | $\mathrm dm=\lambda\,\mathrm ds$，$\lambda$ 为线密度 | 总弧长 $\ell=\int_L\mathrm ds$        |
+| 平面区域（薄片）$D$       | 面积 $\mathrm d\sigma=\mathrm dx\,\mathrm dy$ | $\mathrm dm=\rho\,\mathrm d\sigma$，$\rho$ 为面密度  | 总面积 $A=\iint_D\mathrm d\sigma$     |
+| 空间曲面（薄壳）$\Sigma$  | 曲面面积 $\mathrm dS$                         | $\mathrm dm=\rho\,\mathrm dS$，$\rho$ 为面密度       | 曲面总面积 $S=\iint_\Sigma\mathrm dS$ |
+| 空间立体 $\Omega$         | 体积 $\mathrm dV$                             | $\mathrm dm=\rho\,\mathrm dV$，$\rho$ 为体密度       | 总体积 $V=\iiint_\Omega\mathrm dV$    |
+
+#### 离散质点与组合物体 <span id="section-10-8-1"></span>
+
+设第 $i$ 个质点质量为 $m_i$，坐标为 $(x_i,y_i,z_i)$，则
+
+$$
+\boxed{M=\sum_{i=1}^n m_i,\qquad
+\bar x=\frac{\sum_{i=1}^n m_i x_i}{M},\quad
+\bar y=\frac{\sum_{i=1}^n m_i y_i}{M},\quad
+\bar z=\frac{\sum_{i=1}^n m_i z_i}{M}}.
+$$
+
+组合物体也可用此式：将每一部分的质量及其质心坐标代入。求组合图形的形心时，以各部分的长度、面积或体积作权重；挖去的部分按负权重扣除。
+
+#### 曲线（平面细线、空间细线） <span id="section-10-8-2"></span>
+
+线密度为 $\lambda=\lambda(x,y,z)$ 时，重心坐标为
+
+$$
+\boxed{\begin{aligned}
+M&=\int_L\lambda\,\mathrm ds,\\
+\bar x&=\frac{\int_L x\lambda\,\mathrm ds}{M},\qquad
+\bar y=\frac{\int_L y\lambda\,\mathrm ds}{M},\qquad
+\bar z=\frac{\int_L z\lambda\,\mathrm ds}{M}.
+\end{aligned}}
+$$
+
+**均匀细线的重心＝曲线的形心：**
+
+$$
+\boxed{\ell=\int_L\mathrm ds,\qquad
+\bar x=\frac{\int_L x\,\mathrm ds}{\ell},\quad
+\bar y=\frac{\int_L y\,\mathrm ds}{\ell},\quad
+\bar z=\frac{\int_L z\,\mathrm ds}{\ell}}.
+$$
+
+平面曲线令 $z=0$ 即可。按递增参数积分，常用弧长微元为
+
+$$
+\begin{aligned}
+y=y(x):\quad &\mathrm ds=\sqrt{1+[y'(x)]^2}\,\mathrm dx,\\
+(x,y,z)=(x(t),y(t),z(t)):\quad
+&\mathrm ds=\sqrt{[x'(t)]^2+[y'(t)]^2+[z'(t)]^2}\,\mathrm dt,\\
+r=r(\theta):\quad &\mathrm ds=\sqrt{r(\theta)^2+[r'(\theta)]^2}\,\mathrm d\theta.
+\end{aligned}
+$$
+
+平面参数曲线在第二式中去掉 $z'(t)$ 项。完整计算公式见[第一型曲线积分](#section-9-1)。
+
+#### 平面区域（薄片） <span id="section-10-8-3"></span>
+
+面密度为 $\rho=\rho(x,y)$ 时，重心坐标为
+
+$$
+\boxed{M=\iint_D\rho\,\mathrm d\sigma,\qquad
+\bar x=\frac{\iint_D x\rho\,\mathrm d\sigma}{M},\quad
+\bar y=\frac{\iint_D y\rho\,\mathrm d\sigma}{M}}.
+$$
+
+**均匀薄片的重心＝平面区域的形心：**
+
+$$
+\boxed{A=\iint_D\mathrm d\sigma,\qquad
+\bar x=\frac{\iint_D x\,\mathrm d\sigma}{A},\quad
+\bar y=\frac{\iint_D y\,\mathrm d\sigma}{A}}.
+$$
+
+直角坐标中 $\mathrm d\sigma=\mathrm dx\,\mathrm dy$；极坐标中 $\mathrm d\sigma=r\,\mathrm dr\,\mathrm d\theta$，并将 $x,y$ 分别换成 $r\cos\theta,r\sin\theta$。
+
+更一般的上下两条曲线之间的区域
+
+$$
+D=\{(x,y)\mid a\le x\le b,\ g(x)\le y\le f(x)\}
+$$
+
+的形心为
+
+$$
+\boxed{\begin{aligned}
+A&=\int_a^b[f(x)-g(x)]\,\mathrm dx,\\
+\bar x&=\frac{\int_a^b x[f(x)-g(x)]\,\mathrm dx}{A},\\
+\bar y&=\frac{\frac12\int_a^b[f(x)^2-g(x)^2]\,\mathrm dx}{A}.
+\end{aligned}}
+$$
+
+其中 $f(x)\ge g(x)$ 且 $A>0$；取 $g(x)=0$ 即得到下文曲边梯形的公式。
+
+#### 曲面（空间薄壳） <span id="section-10-8-4"></span>
+
+面密度为 $\rho=\rho(x,y,z)$ 时，重心坐标为
+
+$$
+\boxed{\begin{aligned}
+M&=\iint_\Sigma\rho\,\mathrm dS,\\
+\bar x&=\frac{\iint_\Sigma x\rho\,\mathrm dS}{M},\qquad
+\bar y=\frac{\iint_\Sigma y\rho\,\mathrm dS}{M},\qquad
+\bar z=\frac{\iint_\Sigma z\rho\,\mathrm dS}{M}.
+\end{aligned}}
+$$
+
+**均匀薄壳的重心＝曲面的形心：**
+
+$$
+\boxed{S=\iint_\Sigma\mathrm dS,\qquad
+\bar x=\frac{\iint_\Sigma x\,\mathrm dS}{S},\quad
+\bar y=\frac{\iint_\Sigma y\,\mathrm dS}{S},\quad
+\bar z=\frac{\iint_\Sigma z\,\mathrm dS}{S}}.
+$$
+
+曲面面积微元随投影面变化：
+
+$$
+\begin{aligned}
+z=z(x,y):\quad &\mathrm dS=\sqrt{1+z_x^2+z_y^2}\,\mathrm dx\,\mathrm dy,\\
+x=x(y,z):\quad &\mathrm dS=\sqrt{1+x_y^2+x_z^2}\,\mathrm dy\,\mathrm dz,\\
+y=y(x,z):\quad &\mathrm dS=\sqrt{1+y_x^2+y_z^2}\,\mathrm dx\,\mathrm dz.
+\end{aligned}
+$$
+
+若为正则参数曲面 $\boldsymbol r=\boldsymbol r(u,v)$，则 $\mathrm dS=|\boldsymbol r_u\times\boldsymbol r_v|\,\mathrm du\,\mathrm dv$。换元时，坐标与密度也要代入曲面方程，详见[第一型曲面积分](#section-9-2)。
+
+#### 空间立体 <span id="section-10-8-5"></span>
+
+体密度为 $\rho=\rho(x,y,z)$ 时，重心坐标为
+
+$$
+\boxed{\begin{aligned}
+M&=\iiint_\Omega\rho\,\mathrm dV,\\
+\bar x&=\frac{\iiint_\Omega x\rho\,\mathrm dV}{M},\qquad
+\bar y=\frac{\iiint_\Omega y\rho\,\mathrm dV}{M},\qquad
+\bar z=\frac{\iiint_\Omega z\rho\,\mathrm dV}{M}.
+\end{aligned}}
+$$
+
+**均匀立体的重心＝立体的形心：**
+
+$$
+\boxed{V=\iiint_\Omega\mathrm dV,\qquad
+\bar x=\frac{\iiint_\Omega x\,\mathrm dV}{V},\quad
+\bar y=\frac{\iiint_\Omega y\,\mathrm dV}{V},\quad
+\bar z=\frac{\iiint_\Omega z\,\mathrm dV}{V}}.
+$$
+
+常用体积微元：
+
+$$
+\begin{aligned}
+\text{直角坐标：}\quad &\mathrm dV=\mathrm dx\,\mathrm dy\,\mathrm dz,\\
+\text{柱坐标：}\quad &\mathrm dV=r\,\mathrm dr\,\mathrm d\theta\,\mathrm dz,\\
+\text{球坐标：}\quad &\mathrm dV=r^2\sin\varphi\,\mathrm dr\,\mathrm d\varphi\,\mathrm d\theta.
+\end{aligned}
+$$
+
+球坐标中 $x=r\sin\varphi\cos\theta,\ y=r\sin\varphi\sin\theta,\ z=r\cos\varphi$，$r\ge0,\ 0\le\varphi\le\pi$；$\varphi$ 是与 $z$ 轴正向的夹角。
+
+**对称性与易错点：** 几何对象关于某坐标轴或坐标面对称时，形心位于相应对称轴或对称面上；重心还要求密度具有相同对称性。曲线、曲面及其围成区域或立体的形心须分别按长度、面积、体积计算，不能混用。形心也不一定落在曲线或曲面本身上。
+
+#### 平面曲边梯形的形心：一元积分公式与推导 <span id="section-10-8-6"></span> <span id="section-3-24"></span>
+
+设 $f(x)$ 在 $[a,b]$ 上连续且非负，平面区域为
+
+$$
+D=\{(x,y)\mid a\le x\le b,\ 0\le y\le f(x)\},
+$$
+
+其面积 $S=\int_a^b f(x)\,\mathrm dx>0$。形心是区域的几何中心；若薄片面密度均匀，形心与质心重合。
+
+##### 公式与二重积分化简过程 <span id="section-3-24-1"></span>
+
+以 $\mathrm d\sigma$ 表示面积微元，形心横坐标为
+
+$$
+\begin{aligned}
+\bar x
+&=\frac{\iint_D x\,\mathrm d\sigma}{\iint_D\mathrm d\sigma}\\
+&=\frac{\displaystyle\int_a^b\left[\int_0^{f(x)}x\,\mathrm dy\right]\mathrm dx}
+{\displaystyle\int_a^b\left[\int_0^{f(x)}1\,\mathrm dy\right]\mathrm dx}\\
+&=\frac{\displaystyle\int_a^b[xy]_0^{f(x)}\,\mathrm dx}
+{\displaystyle\int_a^b[y]_0^{f(x)}\,\mathrm dx}\\
+&=\boxed{\frac{\displaystyle\int_a^b xf(x)\,\mathrm dx}
+{\displaystyle\int_a^b f(x)\,\mathrm dx}}.
+\end{aligned}
+$$
+
+形心纵坐标为
+
+$$
+\begin{aligned}
+\bar y
+&=\frac{\iint_D y\,\mathrm d\sigma}{\iint_D\mathrm d\sigma}\\
+&=\frac{\displaystyle\int_a^b\left[\int_0^{f(x)}y\,\mathrm dy\right]\mathrm dx}
+{\displaystyle\int_a^b\left[\int_0^{f(x)}1\,\mathrm dy\right]\mathrm dx}\\
+&=\frac{\displaystyle\int_a^b\left[\frac{y^2}{2}\right]_0^{f(x)}\,\mathrm dx}
+{\displaystyle\int_a^b f(x)\,\mathrm dx}\\
+&=\boxed{\frac{\displaystyle\frac12\int_a^b f^2(x)\,\mathrm dx}
+{\displaystyle\int_a^b f(x)\,\mathrm dx}}.
+\end{aligned}
+$$
+
+**计算顺序：先对 $y$ 积分，此时把 $x$ 看作常数；再对 $x$ 积分。** 分母都是区域面积，$\bar y$ 分子中的 $\frac12$ 来自 $\int y\,\mathrm dy=\frac12y^2$。
+
+也可取竖直小条理解：小条面积为 $\mathrm dS=f(x)\,\mathrm dx$，其形心坐标为 $(x,f(x)/2)$，再按面积加权平均，即得到上述两式。
 
 ### 三角恒等式 <span id="section-10-1"></span>
 

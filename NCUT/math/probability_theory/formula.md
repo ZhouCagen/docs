@@ -5,7 +5,10 @@
 - [第一章：随机事件与概率](#section-1)
 - [第二章：随机变量及其分布](#section-2)
 - [第三章：多维随机变量及其分布](#section-3)
+  - [二维随机变量函数的密度：卷积公式法](#section-3-12)
+  - [常见分布的可加性与正态分布的关系](#section-3-13)
 - [第四章：随机变量的数字特征](#section-4)
+  - [连续型随机变量函数的期望](#section-4-expectation)
   - [常见分布的符号、期望与方差](#section-4-1)
   - [协方差](#section-4-2)
   - [相关系数与不相关](#section-4-3)
@@ -1484,7 +1487,189 @@ $$
 
 **不能推出 $(X,Y)$ 服从二维正态分布。** 还须有联合分布条件；若再已知 $X,Y$ 相互独立，才可确定它们组成相关系数为 $0$ 的二维正态随机变量。
 
+### 二维随机变量函数的密度：卷积公式法 <span id="section-3-12"></span>
+
+设 $(X,Y)$ 的联合概率密度为 $f(x,y)$，令 $Z=g(X,Y)$。当 $g$ 关于其中一个变量为系数非零的线性函数时，可以反解该变量，再求 $Z$ 的概率密度。
+
+#### 反解 Y，保留 x 积分
+
+若由 $z=g(x,y)$ 可反解出 $y=h(x,z)$，则
+
+$$
+\boxed{
+f_Z(z)=\int_{-\infty}^{+\infty}
+f\bigl(x,h(x,z)\bigr)
+\left|\frac{\partial h(x,z)}{\partial z}\right|
+\,\mathrm dx
+}.
+$$
+
+#### 反解 X，保留 y 积分
+
+若由 $z=g(x,y)$ 可反解出 $x=s(y,z)$，则
+
+$$
+\boxed{
+f_Z(z)=\int_{-\infty}^{+\infty}
+f\bigl(s(y,z),y\bigr)
+\left|\frac{\partial s(y,z)}{\partial z}\right|
+\,\mathrm dy
+}.
+$$
+
+**记忆：反解一个变量，代入联合密度，乘反函数对 $z$ 的偏导的绝对值，再对保留的变量积分。** 两种写法任选其一，通常选择反解和积分范围更简单的一种。
+
+#### 常用特例：和与差
+
+当 $Z=X+Y$ 时，反解为 $y=z-x$ 或 $x=z-y$，偏导的绝对值均为 $1$，因此
+
+$$
+\boxed{
+\begin{aligned}
+f_Z(z)
+&=\int_{-\infty}^{+\infty}f(x,z-x)\,\mathrm dx\\
+&=\int_{-\infty}^{+\infty}f(z-y,y)\,\mathrm dy.
+\end{aligned}}
+$$
+
+若 $X,Y$ **相互独立**，则 $f(x,y)=f_X(x)f_Y(y)$，得到通常的卷积公式：
+
+$$
+\boxed{
+f_Z(z)=\int_{-\infty}^{+\infty}f_X(x)f_Y(z-x)\,\mathrm dx
+}.
+$$
+
+当 $Z=X-Y$ 时，反解为 $y=x-z$ 或 $x=z+y$，所以
+
+$$
+\boxed{
+\begin{aligned}
+f_Z(z)
+&=\int_{-\infty}^{+\infty}f(x,x-z)\,\mathrm dx\\
+&=\int_{-\infty}^{+\infty}f(z+y,y)\,\mathrm dy.
+\end{aligned}}
+$$
+
+**注意：使用联合密度的公式不要求 $X,Y$ 独立；只有独立时，才能将联合密度拆成两个边缘密度的乘积。** 公式中的无穷积分限是统一写法，实际计算时须将反解关系代入联合密度的非零区域，确定积分范围及 $z$ 的取值范围，范围外密度为 $0$。
+
+### 常见分布的可加性与正态分布的关系 <span id="section-3-13"></span>
+
+#### 二项分布：独立且成功概率相同，试验次数相加
+
+若 $X,Y$ **相互独立**，且
+
+$$
+X\sim B(n,p),\qquad Y\sim B(m,p),
+$$
+
+则
+
+$$
+\boxed{X+Y\sim B(n+m,p)}.
+$$
+
+**注意：两个二项分布的成功概率必须相同。** 若分别为 $p_1,p_2$ 且 $p_1\ne p_2$，即使独立，和一般也不服从二项分布。
+
+#### 泊松分布：独立时，参数相加
+
+若 $X,Y$ **相互独立**，且
+
+$$
+X\sim P(\lambda_1),\qquad Y\sim P(\lambda_2),
+$$
+
+则
+
+$$
+\boxed{X+Y\sim P(\lambda_1+\lambda_2)}.
+$$
+
+**记忆：二项分布相加，保留同一个 $p$、相加试验次数；泊松分布相加，相加参数 $\lambda$。两条结论都要求独立。**
+
+#### 正态分布：边缘正态、联合正态与和的分布
+
+##### 1. 两个正态随机变量相互独立
+
+若 $X,Y$ **相互独立**，且
+
+$$
+X\sim N(\mu_1,\sigma_1^2),\qquad
+Y\sim N(\mu_2,\sigma_2^2),\qquad \sigma_1,\sigma_2>0,
+$$
+
+则它们组成二维正态随机变量，相关系数为 $0$：
+
+$$
+\boxed{(X,Y)\sim N(\mu_1,\mu_2;\sigma_1^2,\sigma_2^2;0)}.
+$$
+
+其和仍服从正态分布，均值与方差分别相加：
+
+$$
+\boxed{X+Y\sim N(\mu_1+\mu_2,\sigma_1^2+\sigma_2^2)}.
+$$
+
+##### 2. 已知 (X,Y) 服从二维正态分布
+
+若
+
+$$
+(X,Y)\sim N(\mu_1,\mu_2;\sigma_1^2,\sigma_2^2;\rho),
+\qquad |\rho|<1,
+$$
+
+则两个边缘分布均为正态分布，且无须独立就有
+
+$$
+\boxed{
+X+Y\sim N\left(\mu_1+\mu_2,
+\sigma_1^2+\sigma_2^2+2\rho\sigma_1\sigma_2\right)
+}.
+$$
+
+这里 $\rho\sigma_1\sigma_2=\operatorname{Cov}(X,Y)$。在二维正态的前提下，$\rho=0$ 等价于 $X,Y$ 独立，此时退回上一条公式。
+
+##### 3. 仅知道 X、Y 各自服从正态分布
+
+**仅有两个边缘正态，不能保证 $(X,Y)$ 服从二维正态，也不能保证 $X+Y$ 服从正态分布。** 还需要独立性或联合正态等条件。
+
+无论是否正态，均有
+
+$$
+\boxed{
+\begin{aligned}
+E(X+Y)&=\mu_1+\mu_2,\\
+D(X+Y)&=\sigma_1^2+\sigma_2^2+2\operatorname{Cov}(X,Y).
+\end{aligned}}
+$$
+
+**注意：算出和的均值与方差，并不能据此认定和服从正态分布；仅有边缘正态及不相关也不够。**
+
 ## <span style="color: #3498db;">第四章：随机变量的数字特征</span> <span id="section-4"></span>
+
+### 连续型随机变量函数的期望 <span id="section-4-expectation"></span>
+
+设连续型随机变量 $X$ 的概率密度为 $f_X(x)$，令 $Y=g(X)$。若
+
+$$
+\int_{-\infty}^{+\infty}|g(x)|f_X(x)\,\mathrm dx<+\infty,
+$$
+
+则
+
+$$
+\boxed{
+E(Y)=E\bigl[g(X)\bigr]
+=\int_{-\infty}^{+\infty}g(x)f_X(x)\,\mathrm dx
+}.
+$$
+
+其中 $g(x)$ 是变换函数，$f_X(x)$ 是 **$X$ 的概率密度**。若简记为 $f(x)$，公式也可写成 $E(Y)=E[g(X)]=\int_{-\infty}^{+\infty}g(x)f(x)\,\mathrm dx$。
+
+**记忆：函数乘原变量的密度，再对原变量积分；无需先求 $Y$ 的分布或密度，也不要求 $g$ 单调。** 实际积分范围可缩小到 $f_X(x)$ 非零的区域。
+
+特别地，取 $g(x)=x$，得到 $E(X)=\int_{-\infty}^{+\infty}xf_X(x)\,\mathrm dx$；取 $g(x)=x^2$，得到 $E(X^2)=\int_{-\infty}^{+\infty}x^2f_X(x)\,\mathrm dx$，均在相应期望有限时使用。
 
 ### 常见分布的符号、期望与方差 <span id="section-4-1"></span>
 
